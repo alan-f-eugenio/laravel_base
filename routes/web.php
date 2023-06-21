@@ -3,21 +3,20 @@
 use App\Helpers\DefaultStatus;
 use App\Http\Controllers\Integrations\BlingController;
 use App\Http\Controllers\Public\CartProductController;
-use App\Http\Controllers\Public\ContactController;
-use App\Http\Controllers\Public\ContentController;
-use App\Http\Controllers\Public\ContentNavController;
 use App\Http\Controllers\Public\CouponController;
 use App\Http\Controllers\Public\CustomerAddressController;
 use App\Http\Controllers\Public\CustomerController;
 use App\Http\Controllers\Public\CustomerPasswordController;
-use App\Http\Controllers\Public\EmailController;
 use App\Http\Controllers\Public\PaymentController;
 use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\ShippingController;
-use App\Models\Banner;
 use App\Models\ProductCategory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Route;
+use Modules\Banner\Entities\Banner;
+use Modules\Contact\Http\Controllers\ContactController;
+use Modules\Content\Http\Controllers\ContentController;
+use Modules\Content\Http\Controllers\ContentNavController;
+use Modules\Email\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------

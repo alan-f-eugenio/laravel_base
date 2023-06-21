@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\ContentNav;
 use App\Models\Define;
 use App\Models\Integration;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Modules\Content\Entities\ContentNav;
 
 class AppServiceProvider extends ServiceProvider {
     /**

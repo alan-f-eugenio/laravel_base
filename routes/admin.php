@@ -6,16 +6,10 @@ use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
-use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Admin\CartController as AdminCartController;
-use App\Http\Controllers\Admin\ContactController as AdminContactController;
-use App\Http\Controllers\Admin\ContentController as AdminContentController;
-use App\Http\Controllers\Admin\ContentImageController as AdminContentImageController;
-use App\Http\Controllers\Admin\ContentNavController as AdminContentNavController;
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\DefineController as AdminDefineController;
-use App\Http\Controllers\Admin\EmailController as AdminEmailController;
 use App\Http\Controllers\Admin\IntegrationController as AdminIntegrationController;
 use App\Http\Controllers\Admin\ProductAttributeController as AdminProductAttributeController;
 use App\Http\Controllers\Admin\ProductAttributeOptController as AdminProductAttributeOptController;
@@ -24,6 +18,12 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use Illuminate\Support\Facades\Route;
+use Modules\Banner\Http\Controllers\AdminBannerController;
+use Modules\Contact\Http\Controllers\AdminContactController;
+use Modules\Content\Http\Controllers\AdminContentController;
+use Modules\Content\Http\Controllers\AdminContentImageController;
+use Modules\Content\Http\Controllers\AdminContentNavController;
+use Modules\Email\Http\Controllers\AdminEmailController;
 
 Route::prefix('admin')->group(function () {
 
