@@ -29,8 +29,9 @@
                 </x-slot>
                 <x-slot name="tbody">
 <tr class="bg-white">
-    <x-admin.layout.sections.table-td class="border-b ordemNumber">
-        {{ $item->ordem }}
+    <x-admin.layout.sections.table-td class="border-b ordemNumber cursor-grab">
+        <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+        <span class="text-xl">{{ $item->ordem }}</span>
     </x-admin.layout.sections.table-td>
     <x-admin.layout.sections.table-td :main="true" class="border-b">
         {{ $item->name }}

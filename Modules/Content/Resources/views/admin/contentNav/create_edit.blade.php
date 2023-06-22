@@ -29,7 +29,7 @@
                         required />
                 </x-admin.layout.sections.form-label>
                 <x-admin.layout.sections.form-select inpName="type" title="Tipo de Conteúdo" required>
-                    @foreach (\App\Helpers\ContentNavTypes::array() as $typeKey => $typeValue)
+                    @foreach ($contentNavTypes as $typeKey => $typeValue)
                         <x-admin.layout.sections.form-select-option :inpValue="$typeKey" :title="$typeValue"
                             :selected="(old('type') ?: $item->type?->value) == $typeKey" />
                     @endforeach

@@ -7,7 +7,7 @@
     <x-admin.layout.sections.list-section>
         <x-admin.layout.sections.filter gridCols="sm:grid-cols-4">
             <x-admin.layout.sections.filter-select inpName="seen" title="Status">
-                @foreach (\App\Helpers\ContactStatus::array() as $statusKey => $statusValue)
+                @foreach ($contactStatus as $statusKey => $statusValue)
                     <x-admin.layout.sections.filter-select-option inpName="status" :inpValue="$statusKey"
                         :title="$statusValue" />
                 @endforeach

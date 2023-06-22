@@ -57,8 +57,9 @@
                 <x-slot name="tbody">
                     @forelse ($items as $item)
                         <tr data-id="{{ $item->id }}" class="bg-white border-b">
-                            <x-admin.layout.sections.table-td class="ordemNumber">
-                                {{ $item->ordem }}
+                            <x-admin.layout.sections.table-td class="ordemNumber cursor-grab">
+                                <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+                                <span class="text-xl">{{ $item->ordem }}</span>
                             </x-admin.layout.sections.table-td>
                             <x-admin.layout.sections.table-td :main="true">
                                 {{ $item->title }}
@@ -105,7 +106,7 @@
                 let sortItens = element.querySelectorAll("tr");
                 sortItens.forEach((el2, i2) => {
                     let newOrdem = parseInt(i2) + 1;
-                    el2.querySelector('.ordemNumber').textContent = newOrdem;
+                    el2.querySelector('.ordemNumber span').textContent = newOrdem;
                     sortJson[i2] = {
                         id: el2.dataset.id,
                         ordem: newOrdem

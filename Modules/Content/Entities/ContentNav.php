@@ -2,11 +2,11 @@
 
 namespace Modules\Content\Entities;
 
-use App\Helpers\ContentNavTypes;
 use App\Helpers\DefaultStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Content\Helpers\ContentNavTypes;
 
 class ContentNav extends Model
 {

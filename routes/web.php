@@ -1,22 +1,24 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Helpers\DefaultStatus;
+
 use App\Http\Controllers\Integrations\BlingController;
-use App\Http\Controllers\Public\CartProductController;
-use App\Http\Controllers\Public\CouponController;
 use App\Http\Controllers\Public\CustomerAddressController;
 use App\Http\Controllers\Public\CustomerController;
 use App\Http\Controllers\Public\CustomerPasswordController;
 use App\Http\Controllers\Public\PaymentController;
-use App\Http\Controllers\Public\ProductController;
 use App\Http\Controllers\Public\ShippingController;
-use App\Models\ProductCategory;
-use Illuminate\Support\Facades\Route;
+
 use Modules\Banner\Entities\Banner;
+use Modules\Cart\Http\Controllers\CartProductController;
 use Modules\Contact\Http\Controllers\ContactController;
 use Modules\Content\Http\Controllers\ContentController;
 use Modules\Content\Http\Controllers\ContentNavController;
+use Modules\Coupon\Http\Controllers\CouponController;
 use Modules\Email\Http\Controllers\EmailController;
+use Modules\Product\Entities\ProductCategory;
+use Modules\Product\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------

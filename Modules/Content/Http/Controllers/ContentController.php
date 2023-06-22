@@ -9,6 +9,6 @@ use Modules\Content\Entities\ContentNav;
 
 class ContentController extends Controller {
     public function __invoke(Request $request, ContentNav $nav, Content $content) {
-        return view('public.contents.index', ['item' => $content]);
+        return view('content::public.content.index', ['item' => $content]);
     }
 }

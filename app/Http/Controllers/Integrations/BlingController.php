@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Integrations;
 
 use App\Helpers\DefaultStatus;
-use App\Helpers\ProductHasChildTypes;
-use App\Helpers\ProductTypes;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use Illuminate\Support\Str;
+use Modules\Product\Entities\Product;
+use Modules\Product\Helpers\ProductHasChildTypes;
+use Modules\Product\Helpers\ProductTypes;
 
 class BlingController extends Controller {
     public static function getAllProducts() {

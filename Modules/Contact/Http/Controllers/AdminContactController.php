@@ -5,6 +5,7 @@ namespace Modules\Contact\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Contact\Entities\Contact;
+use Modules\Contact\Helpers\ContactStatus;
 
 class AdminContactController extends Controller {
     public function index(Request $request) {
@@ -23,7 +24,9 @@ class AdminContactController extends Controller {
             $query->where('seen', $value);
         });
 
-        return view('contact::admin.index', ['collection' => $query->paginate(10)]);
+        $contactStatus = ContactStatus::array();
+
+        return view('contact::admin.index', ['collection' => $query->paginate(10), 'contactStatus' => $contactStatus]);
     }
 
     public function show(Contact $contact) {

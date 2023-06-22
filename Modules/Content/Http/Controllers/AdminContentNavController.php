@@ -5,6 +5,7 @@ namespace Modules\Content\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Content\Entities\ContentNav;
+use Modules\Content\Helpers\ContentNavTypes;
 use Modules\Content\Http\Requests\AdminContentNavRequest;
 
 class AdminContentNavController extends Controller {
@@ -23,7 +24,8 @@ class AdminContentNavController extends Controller {
 
     public function create() {
         $item = new ContentNav;
-        return view('content::admin.contentNav.create_edit', ['item' => $item]);
+        $contentNavTypes = ContentNavTypes::array();
+        return view('content::admin.contentNav.create_edit', ['item' => $item, 'contentNavTypes' => $contentNavTypes]);
     }
 
     public function store(AdminContentNavRequest $request) {
@@ -38,7 +40,8 @@ class AdminContentNavController extends Controller {
     }
 
     public function edit(ContentNav $contentNav) {
-        return view('content::admin.contentNav.create_edit', ['item' => $contentNav]);
+        $contentNavTypes = ContentNavTypes::array();
+        return view('content::admin.contentNav.create_edit', ['item' => $contentNav, 'contentNavTypes' => $contentNavTypes]);
     }
 
     public function update(AdminContentNavRequest $request, ContentNav $contentNav) {

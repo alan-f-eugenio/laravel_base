@@ -2,10 +2,10 @@
 
 namespace Modules\Content\Http\Requests;
 
-use App\Helpers\ContentNavTypes;
 use App\Helpers\DefaultStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use Modules\Content\Helpers\ContentNavTypes;
 
 class AdminContentNavRequest extends FormRequest
 {
