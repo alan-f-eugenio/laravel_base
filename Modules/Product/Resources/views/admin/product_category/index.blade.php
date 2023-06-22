@@ -1,47 +1,47 @@
-<x-admin.layout.app>
+<x-admin-layout>
     @push('stylesAndScript')
         <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
     @endpush
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Categorias
-        </x-admin.layout.sections.page-title>
-        <x-admin.layout.sections.page-button :href="route('admin.product_categories.create')">
+        </x-admin.page-title>
+        <x-admin.page-button :href="route('admin.product_categories.create')">
             Cadastrar novo
-        </x-admin.layout.sections.page-button>
+        </x-admin.page-button>
     </x-slot>
-    <x-admin.layout.sections.list-section>
-        <x-admin.layout.sections.table :collection="$collection" :sortable="true">
+    <x-admin.list-section>
+        <x-admin.table :collection="$collection" :sortable="true">
             <x-slot name="ths">
-                <x-admin.layout.sections.table-th>
+                <x-admin.table-th>
                     Ordem
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th width="20%">
+                </x-admin.table-th>
+                <x-admin.table-th width="20%">
                     Título
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Cadastrado
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Alterado
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Status
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Ações
-                </x-admin.layout.sections.table-th>
+                </x-admin.table-th>
             </x-slot>
             <x-slot name="tbody">
                 @forelse ($collection as $item)
-                    <x-admin.layout.sections.product-category-recursive-table :item="$item" :collection="$item->allChilds"
+                    <x-product::admin.product-category-recursive-table :item="$item" :collection="$item->allChilds"
                         :first="true" />
                 @empty
-                    <x-admin.layout.sections.table-no-result />
+                    <x-admin.table-no-result />
                 @endforelse
             </x-slot>
-        </x-admin.layout.sections.table>
-    </x-admin.layout.sections.list-section>
+        </x-admin.table>
+    </x-admin.list-section>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
@@ -90,4 +90,4 @@
             })
         })
     </script>
-</x-admin.layout.app>
+</x-admin-layout>

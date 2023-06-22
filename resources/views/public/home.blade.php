@@ -1,4 +1,4 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="space-y-6">
         @if ($banner)
             <img class="w-full" src="{{ asset('storage/' . $banner->filename) }}">
@@ -52,7 +52,7 @@
                 </h2>
                 <div class="grid items-center gap-6 bg-white sm:grid-cols-6">
                     @forelse ($category->getAllProducts() as $product)
-                        <x-public.layout.sections.box-product :product="$product" />
+                        <x-product::public.box-product :product="$product" />
                     @empty
                         <p>Nenhum produto cadastrado</p>
                     @endforelse
@@ -179,4 +179,4 @@
             </div>
         @endif
     </div>
-</x-public.layout.app>
+</x-public-layout>

@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-public-layout>
     <form method="POST" action="{{ route('admin.password.store') }}">
         @csrf
 
@@ -37,4 +37,4 @@
             </x-admin.breeze.primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-public-layout>

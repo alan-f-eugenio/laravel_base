@@ -1,103 +1,103 @@
-<x-admin.layout.app>
+<x-admin-layout>
     @push('stylesAndScript')
         <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
         <script src="{{ Vite::asset('resources/js/spotlight.bundle.js') }}"></script>
     @endpush
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Banners
-        </x-admin.layout.sections.page-title>
-        <x-admin.layout.sections.page-button :href="route('admin.banners.create')">
+        </x-admin.page-title>
+        <x-admin.page-button :href="route('admin.banners.create')">
             Cadastrar novo
-        </x-admin.layout.sections.page-button>
+        </x-admin.page-button>
     </x-slot>
-    <x-admin.layout.sections.list-section>
-        <x-admin.layout.sections.filter gridCols="sm:grid-cols-3">
-            <x-admin.layout.sections.filter-select inpName="status" title="Status">
+    <x-admin.list-section>
+        <x-admin.filter gridCols="sm:grid-cols-3">
+            <x-admin.filter-select inpName="status" title="Status">
                 @foreach (\App\Helpers\DefaultStatus::array() as $statusKey => $statusValue)
-                    <x-admin.layout.sections.filter-select-option inpName="status" :inpValue="$statusKey" :title="$statusValue" />
+                    <x-admin.filter-select-option inpName="status" :inpValue="$statusKey" :title="$statusValue" />
                 @endforeach
-            </x-admin.layout.sections.filter-select>
-            <x-admin.layout.sections.filter-input inpName="title" title="Título" placeholder="Título do banner" />
-            <x-admin.layout.sections.filter-select inpName="local_id" title="Local">
+            </x-admin.filter-select>
+            <x-admin.filter-input inpName="title" title="Título" placeholder="Título do banner" />
+            <x-admin.filter-select inpName="local_id" title="Local">
                 @foreach ($bannerLocals as $local)
-                    <x-admin.layout.sections.filter-select-option inpName="local_id" :inpValue="$local->id"
+                    <x-admin.filter-select-option inpName="local_id" :inpValue="$local->id"
                         :title="$local->title" />
                 @endforeach
-            </x-admin.layout.sections.filter-select>
-        </x-admin.layout.sections.filter>
+            </x-admin.filter-select>
+        </x-admin.filter>
         @foreach ($collection as $local => $items)
-            <x-admin.layout.sections.form-subtitle>
+            <x-admin.form-subtitle>
                 {{ $local }}
-            </x-admin.layout.sections.form-subtitle>
-            <x-admin.layout.sections.table :collection="$items" :sortable="true">
+            </x-admin.form-subtitle>
+            <x-admin.table :collection="$items" :sortable="true">
                 <x-slot name="ths">
-                    <x-admin.layout.sections.table-th>
+                    <x-admin.table-th>
                         Ordem
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Título
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Local
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Cadastrado
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Alterado
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Status
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Ações
-                    </x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
                 </x-slot>
                 <x-slot name="tbody">
                     @forelse ($items as $item)
                         <tr data-id="{{ $item->id }}" class="bg-white border-b">
-                            <x-admin.layout.sections.table-td class="ordemNumber cursor-grab">
+                            <x-admin.table-td class="ordemNumber cursor-grab">
                                 <i class="mr-3 text-base ti ti-arrows-up-down"></i>
                                 <span class="text-xl">{{ $item->ordem }}</span>
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td :main="true">
+                            </x-admin.table-td>
+                            <x-admin.table-td :main="true">
                                 {{ $item->title }}
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td>
+                            </x-admin.table-td>
+                            <x-admin.table-td>
                                 {{ $item->local->title }}
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td>
+                            </x-admin.table-td>
+                            <x-admin.table-td>
                                 {{ $item->created_at->format('d/m/Y H:i:s') }}
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td>
+                            </x-admin.table-td>
+                            <x-admin.table-td>
                                 {{ $item->updated_at != $item->created_at ? $item->updated_at->format('d/m/Y H:i:s') : 'Nunca' }}
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td>
-                                <x-admin.layout.sections.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()"
+                            </x-admin.table-td>
+                            <x-admin.table-td>
+                                <x-admin.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()"
                                     :falseTitle="$item->status->texto()" />
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-actions-td>
-                                <x-admin.layout.sections.table-action class="spotlight" :data-title="$local . ' - ' . $item->title"
+                            </x-admin.table-td>
+                            <x-admin.table-actions-td>
+                                <x-admin.table-action class="spotlight" :data-title="$local . ' - ' . $item->title"
                                     :href="asset('storage/' . $item->filename)" title="Visualizar">
                                     <i class="text-base ti ti-eye"></i>
-                                </x-admin.layout.sections.table-action>
-                                <x-admin.layout.sections.table-action :href="route('admin.banners.edit', $item->id)" title="Editar">
+                                </x-admin.table-action>
+                                <x-admin.table-action :href="route('admin.banners.edit', $item->id)" title="Editar">
                                     <i class="text-base ti ti-edit"></i>
-                                </x-admin.layout.sections.table-action>
-                                <x-admin.layout.sections.table-action :href="route('admin.banners.destroy', $item->id)" title="Excluir"
+                                </x-admin.table-action>
+                                <x-admin.table-action :href="route('admin.banners.destroy', $item->id)" title="Excluir"
                                     :destroy="true">
                                     <i class="text-base ti ti-trash"></i>
-                                </x-admin.layout.sections.table-action>
-                            </x-admin.layout.sections.table-actions-td>
+                                </x-admin.table-action>
+                            </x-admin.table-actions-td>
                         </tr>
                     @empty
-                        <x-admin.layout.sections.table-no-result />
+                        <x-admin.table-no-result />
                     @endforelse
                 </x-slot>
-            </x-admin.layout.sections.table>
+            </x-admin.table>
         @endforeach
-    </x-admin.layout.sections.list-section>
+    </x-admin.list-section>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
@@ -138,4 +138,4 @@
             })
         })
     </script>
-</x-admin.layout.app>
+</x-admin-layout>

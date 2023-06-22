@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 
-use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\DefineController as AdminDefineController;
 use App\Http\Controllers\Admin\IntegrationController as AdminIntegrationController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
@@ -21,6 +20,7 @@ use Modules\Content\Http\Controllers\AdminContentController;
 use Modules\Content\Http\Controllers\AdminContentImageController;
 use Modules\Content\Http\Controllers\AdminContentNavController;
 use Modules\Coupon\Http\Controllers\AdminCouponController;
+use Modules\Customer\Http\Controllers\AdminCustomerController;
 use Modules\Email\Http\Controllers\AdminEmailController;
 use Modules\Product\Http\Controllers\AdminProductAttributeController;
 use Modules\Product\Http\Controllers\AdminProductAttributeOptController;

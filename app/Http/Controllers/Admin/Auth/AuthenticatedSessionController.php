@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller {
@@ -35,10 +34,10 @@ class AuthenticatedSessionController extends Controller {
      * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse {
-        auth()->guard('admin')->logout();
+        auth('admin')->logout();
 
-        $request->session()->invalidate();
-
+        $request->session()->regenerate();
+        // $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect(RouteServiceProvider::HOME);

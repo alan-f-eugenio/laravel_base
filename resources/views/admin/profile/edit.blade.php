@@ -1,8 +1,8 @@
-<x-admin.layout.app>
+<x-admin-layout>
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Perfil
-        </x-admin.layout.sections.page-title>
+        </x-admin.page-title>
     </x-slot>
     <div class="mx-auto space-y-6">
         <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
@@ -151,4 +151,4 @@
             </div>
         </div>
     </div>
-</x-admin.layout.app>
+</x-admin-layout>

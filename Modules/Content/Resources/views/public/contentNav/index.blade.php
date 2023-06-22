@@ -1,4 +1,4 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
         <h2 class="font-bold">{{ $nav->title }}</h2>
         <div class="grid items-center gap-6 bg-white sm:grid-cols-3">
@@ -17,4 +17,4 @@
             @endforelse
         </div>
     </div>
-</x-public.layout.app>
+</x-public-layout>

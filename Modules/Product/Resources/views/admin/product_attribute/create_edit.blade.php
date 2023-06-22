@@ -1,73 +1,73 @@
-<x-admin.layout.app>
+<x-admin-layout>
     @push('stylesAndScript')
         <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
     @endpush
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Atributos >
-            <x-admin.layout.sections.page-subtitle>
+            <x-admin.page-subtitle>
                 {{ $item->id ? 'Alterar' : 'Cadastrar' }}
-            </x-admin.layout.sections.page-subtitle>
-        </x-admin.layout.sections.page-title>
-        <x-admin.layout.sections.page-button :href="route('admin.product_attributes.index')">
+            </x-admin.page-subtitle>
+        </x-admin.page-title>
+        <x-admin.page-button :href="route('admin.product_attributes.index')">
             Listar Atributos
-        </x-admin.layout.sections.page-button>
+        </x-admin.page-button>
     </x-slot>
-    <x-admin.layout.sections.list-section>
-        <x-admin.layout.sections.form :action="$item->id
+    <x-admin.list-section>
+        <x-admin.form :action="$item->id
             ? route('admin.product_attributes.update', $item->id)
             : route('admin.product_attributes.store')" :editing="(bool) $item->id" :hasFile="true">
-            <x-admin.layout.sections.form-grid gridCols="sm:grid-cols-2">
-                <x-admin.layout.sections.form-select inpName="status" title="Status" required>
+            <x-admin.form-grid gridCols="sm:grid-cols-2">
+                <x-admin.form-select inpName="status" title="Status" required>
                     @foreach (\App\Helpers\DefaultStatus::array() as $statusKey => $statusValue)
-                        <x-admin.layout.sections.form-select-option :inpValue="$statusKey" :title="$statusValue"
+                        <x-admin.form-select-option :inpValue="$statusKey" :title="$statusValue"
                             :selected="(old('status') ?: $item->status?->value) == $statusKey" />
                     @endforeach
-                </x-admin.layout.sections.form-select>
-                <x-admin.layout.sections.form-label inpName="name" title="Nome">
-                    <x-admin.layout.sections.form-input inpName="name" placeholder="Nome do atributo" :inpValue="old('name') ?: $item->name"
+                </x-admin.form-select>
+                <x-admin.form-label inpName="name" title="Nome">
+                    <x-admin.form-input inpName="name" placeholder="Nome do atributo" :inpValue="old('name') ?: $item->name"
                         required />
-                </x-admin.layout.sections.form-label>
-            </x-admin.layout.sections.form-grid>
-            <x-admin.layout.sections.table :collection="$item->options" :sortable="true">
+                </x-admin.form-label>
+            </x-admin.form-grid>
+            <x-admin.table :collection="$item->options" :sortable="true">
                 <x-slot name="ths">
-                    <x-admin.layout.sections.table-th>
+                    <x-admin.table-th>
                         Ordem
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Opção do Atributo
-                    </x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
                     @if ($item->has_files)
-                        <x-admin.layout.sections.table-th>
+                        <x-admin.table-th>
                             Imagem
-                        </x-admin.layout.sections.table-th>
+                        </x-admin.table-th>
                     @endif
-                    <x-admin.layout.sections.table-th>
+                    <x-admin.table-th>
                         Cadastrado
-                    </x-admin.layout.sections.table-th>
-                    <x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
+                    <x-admin.table-th>
                         Ações
-                    </x-admin.layout.sections.table-th>
+                    </x-admin.table-th>
                 </x-slot>
                 <x-slot name="tbody">
                     @foreach ($listOptions as $keyOption => $option)
                         <tr class="bg-white border-b optBox">
-                            <x-admin.layout.sections.table-td class="ordemNumber cursor-grab">
+                            <x-admin.table-td class="ordemNumber cursor-grab">
                                 <i class="mr-3 text-base ti ti-arrows-up-down"></i>
                                 <span class="text-xl">{{ $option->ordem }}</span>
-                                <x-admin.layout.sections.form-input type="hidden" inpName="option_ordem[]" required
+                                <x-admin.form-input type="hidden" inpName="option_ordem[]" required
                                     :inpValue="$option->ordem" />
-                                <x-admin.layout.sections.form-input type="hidden" inpName="option_id[]" required
+                                <x-admin.form-input type="hidden" inpName="option_id[]" required
                                     :inpValue="$option->id" />
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-td>
-                                <x-admin.layout.sections.form-input inpName="option_name[]" required
+                            </x-admin.table-td>
+                            <x-admin.table-td>
+                                <x-admin.form-input inpName="option_name[]" required
                                     placeholder="Nome da opção" :inpValue="$option->name" />
-                            </x-admin.layout.sections.table-td>
+                            </x-admin.table-td>
                             @if ($item->has_files)
-                                <x-admin.layout.sections.table-actions-td>
+                                <x-admin.table-actions-td>
                                     <div class="flex flex-col items-center justify-center">
-                                        <x-admin.layout.sections.table-action href="javascript:;"
+                                        <x-admin.table-action href="javascript:;"
                                             class="z-10 addOptPhoto" :hasPhoto="(bool) $option->filename" :title="(!$option->filename ? 'Adicionar' : 'Alterar') . ' Imagem'">
                                             @if ($option->filename)
                                                 <div class="w-10 h-10">
@@ -79,78 +79,78 @@
                                             @else
                                                 <i class="text-base ti ti-photo-plus"></i>
                                             @endif
-                                        </x-admin.layout.sections.table-action>
+                                        </x-admin.table-action>
                                         <input class="w-px h-px option_filename -z-10" type="file"
                                             name="option_filename[]" accept=".png, .jpg, .jpeg">
                                     </div>
-                                </x-admin.layout.sections.table-actions-td>
+                                </x-admin.table-actions-td>
                             @endif
-                            <x-admin.layout.sections.table-td>
+                            <x-admin.table-td>
                                 {{ $option->created_at ? $option->created_at->format('d/m/Y H:i:s') : 'Salve para confirmar' }}
-                                <x-admin.layout.sections.form-input type="hidden" inpName="option_created_at[]"
+                                <x-admin.form-input type="hidden" inpName="option_created_at[]"
                                     required :inpValue="$option->created_at" />
-                            </x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.table-actions-td>
-                                <x-admin.layout.sections.table-action href="javascript:;" class="removeOptBtn"
+                            </x-admin.table-td>
+                            <x-admin.table-actions-td>
+                                <x-admin.table-action href="javascript:;" class="removeOptBtn"
                                     title="Remover Opção">
                                     <i class="text-base ti ti-trash"></i>
-                                </x-admin.layout.sections.table-action>
-                            </x-admin.layout.sections.table-actions-td>
+                                </x-admin.table-action>
+                            </x-admin.table-actions-td>
                         </tr>
                     @endforeach
                     <tr class="hidden bg-white border-b optBoxNew notSortable">
-                        <x-admin.layout.sections.table-td class="ordemNumber cursor-grab">
+                        <x-admin.table-td class="ordemNumber cursor-grab">
                             <i class="mr-3 text-base ti ti-arrows-up-down"></i>
                             <span class="text-xl"></span>
-                            <x-admin.layout.sections.form-input type="hidden" inpName="option_ordem[]" disabled
+                            <x-admin.form-input type="hidden" inpName="option_ordem[]" disabled
                                 required />
-                            <x-admin.layout.sections.form-input type="hidden" inpName="option_id[]" disabled
+                            <x-admin.form-input type="hidden" inpName="option_id[]" disabled
                                 required />
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.form-input inpName="option_name[]" disabled required
+                        </x-admin.table-td>
+                        <x-admin.table-td>
+                            <x-admin.form-input inpName="option_name[]" disabled required
                                 placeholder="Nome da opção" />
-                        </x-admin.layout.sections.table-td>
+                        </x-admin.table-td>
                         @if ($item->has_files)
-                            <x-admin.layout.sections.table-actions-td>
+                            <x-admin.table-actions-td>
                                 <div class="flex flex-col items-center justify-center">
-                                    <x-admin.layout.sections.table-action href="javascript:;" class="z-10 addOptPhoto"
+                                    <x-admin.table-action href="javascript:;" class="z-10 addOptPhoto"
                                         title="Adicionar Opção">
                                         <i class="text-base ti ti-photo-plus"></i>
-                                    </x-admin.layout.sections.table-action>
+                                    </x-admin.table-action>
                                     <input class="w-px h-px option_filename -z-10" type="file"
                                         name="option_filename[]" accept=".png, .jpg, .jpeg" disabled required>
                                 </div>
-                            </x-admin.layout.sections.table-actions-td>
+                            </x-admin.table-actions-td>
                         @endif
-                        <x-admin.layout.sections.table-td>
+                        <x-admin.table-td>
                             Salve para confirmar
-                            <x-admin.layout.sections.form-input type="hidden" inpName="option_created_at[]" required
+                            <x-admin.form-input type="hidden" inpName="option_created_at[]" required
                                 disabled />
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-actions-td>
-                            <x-admin.layout.sections.table-action href="javascript:;" class="removeOptBtn"
+                        </x-admin.table-td>
+                        <x-admin.table-actions-td>
+                            <x-admin.table-action href="javascript:;" class="removeOptBtn"
                                 title="Remover Opção">
                                 <i class="text-base ti ti-trash"></i>
-                            </x-admin.layout.sections.table-action>
-                        </x-admin.layout.sections.table-actions-td>
+                            </x-admin.table-action>
+                        </x-admin.table-actions-td>
                     </tr>
                 </x-slot>
                 <x-slot name="tfoot">
                     <tr class="bg-white">
-                        <x-admin.layout.sections.table-td colspan="{{ $item->has_files ? 4 : 3 }}">
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-actions-td>
-                            <x-admin.layout.sections.table-action href="javascript:;" id="addOptBtn"
+                        <x-admin.table-td colspan="{{ $item->has_files ? 4 : 3 }}">
+                        </x-admin.table-td>
+                        <x-admin.table-actions-td>
+                            <x-admin.table-action href="javascript:;" id="addOptBtn"
                                 title="Adicionar Opção">
                                 <i class="text-base ti ti-plus max-h-"></i>
-                            </x-admin.layout.sections.table-action>
-                        </x-admin.layout.sections.table-actions-td>
+                            </x-admin.table-action>
+                        </x-admin.table-actions-td>
                     </tr>
                 </x-slot>
-            </x-admin.layout.sections.table>
-        </x-admin.layout.sections.form>
-    </x-admin.layout.sections.list-section>
+            </x-admin.table>
+        </x-admin.form>
+    </x-admin.list-section>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const addOptBtn = document.querySelector("#addOptBtn");
@@ -237,4 +237,4 @@
             })
         })
     </script>
-</x-admin.layout.app>
+</x-admin-layout>

@@ -1,6 +1,6 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
-        <x-admin.layout.sections.list-section>
+        <x-admin.list-section>
             <form action="" class="space-y-6" method="POST">
                 @csrf
                 <div class="addressList">
@@ -142,7 +142,7 @@
                 </div>
                 <button type="submit" class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Finalizar compra</button>
             </form>
-        </x-admin.layout.sections.list-section>
+        </x-admin.list-section>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -173,4 +173,4 @@
             })
         })
     </script>
-</x-public.layout.app>
+</x-public-layout>

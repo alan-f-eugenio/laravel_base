@@ -1,4 +1,4 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="space-y-6">
         <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
             <div class="grid items-center gap-6 bg-white sm:grid-cols-2">
@@ -53,10 +53,10 @@
                 <h2>Produtos relacionados</h2>
                 <div class="grid items-center gap-6 bg-white sm:grid-cols-6">
                     @foreach ($relatedProducts as $product)
-                        <x-public.layout.sections.box-product :product="$product" />
+                        <x-product::public.box-product :product="$product" />
                     @endforeach
                 </div>
             @endif
         </div>
     </div>
-</x-public.layout.app>
+</x-public-layout>

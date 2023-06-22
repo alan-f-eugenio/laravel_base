@@ -12,7 +12,7 @@ class IntegrationController extends Controller {
      */
     public function edit() {
         //
-        $integrations = config('integrations');
+        $integrations = config('integrations') ?: [];
 
         return view('admin.integrations.edit', ['itens' => $integrations]);
     }

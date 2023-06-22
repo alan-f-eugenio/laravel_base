@@ -1,16 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use Modules\Content\Http\Controllers\ContentController;
+use Modules\Content\Http\Controllers\ContentNavController;
 
-Route::prefix('content')->group(function() {
-    Route::get('/', 'ContentController@index');
+Route::prefix('conteudo')->group(function () {
+    Route::get('{nav:slug}', ContentNavController::class)->name('content_nav');
+    Route::get('{nav:slug}/{content:slug}', ContentController::class)->name('content');
 });

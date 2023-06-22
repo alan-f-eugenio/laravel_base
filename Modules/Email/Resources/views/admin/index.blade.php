@@ -1,51 +1,51 @@
-<x-admin.layout.app>
+<x-admin-layout>
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Lista de E-mails
-        </x-admin.layout.sections.page-title>
+        </x-admin.page-title>
     </x-slot>
-    <x-admin.layout.sections.list-section>
-        <x-admin.layout.sections.filter gridCols="sm:grid-cols-2">
-            <x-admin.layout.sections.filter-input inpName="name" title="Nome" placeholder="Nome" />
-            <x-admin.layout.sections.filter-input inpName="email" title="E-mail" placeholder="contato@email.com.br" />
-        </x-admin.layout.sections.filter>
-        <x-admin.layout.sections.table :collection="$collection">
+    <x-admin.list-section>
+        <x-admin.filter gridCols="sm:grid-cols-2">
+            <x-admin.filter-input inpName="name" title="Nome" placeholder="Nome" />
+            <x-admin.filter-input inpName="email" title="E-mail" placeholder="contato@email.com.br" />
+        </x-admin.filter>
+        <x-admin.table :collection="$collection">
             <x-slot name="ths">
-                <x-admin.layout.sections.table-th>
+                <x-admin.table-th>
                     Nome
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Login
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Cadastrado
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Ações
-                </x-admin.layout.sections.table-th>
+                </x-admin.table-th>
             </x-slot>
             <x-slot name="tbody">
                 @forelse ($collection as $item)
                     <tr class="bg-white border-b">
-                        <x-admin.layout.sections.table-td :main="true">
+                        <x-admin.table-td :main="true">
                             {{ $item->name }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
+                        </x-admin.table-td>
+                        <x-admin.table-td>
                             {{ $item->email }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
+                        </x-admin.table-td>
+                        <x-admin.table-td>
                             {{ $item->created_at->format('d/m/Y H:i:s') }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-actions-td>
-                            <x-admin.layout.sections.table-action :href="route('admin.emails.destroy', $item->id)" title="Excluir" :destroy="true">
+                        </x-admin.table-td>
+                        <x-admin.table-actions-td>
+                            <x-admin.table-action :href="route('admin.emails.destroy', $item->id)" title="Excluir" :destroy="true">
                                 <i class="text-base ti ti-trash"></i>
-                            </x-admin.layout.sections.table-action>
-                        </x-admin.layout.sections.table-actions-td>
+                            </x-admin.table-action>
+                        </x-admin.table-actions-td>
                     </tr>
                 @empty
-                    <x-admin.layout.sections.table-no-result />
+                    <x-admin.table-no-result />
                 @endforelse
             </x-slot>
-        </x-admin.layout.sections.table>
-    </x-admin.layout.sections.list-section>
-</x-admin.layout.app>
+        </x-admin.table>
+    </x-admin.list-section>
+</x-admin-layout>

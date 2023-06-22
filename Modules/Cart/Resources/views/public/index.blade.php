@@ -1,4 +1,4 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="space-y-6">
         @if (!$cart->cartProducts->count())
             <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
@@ -117,4 +117,4 @@
             </div>
         @endif
     </div>
-</x-public.layout.app>
+</x-public-layout>

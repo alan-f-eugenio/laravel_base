@@ -1,4 +1,4 @@
-<x-public.layout.app>
+<x-public-layout>
     <div class="space-y-6">
         <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
             @if ($item)
@@ -19,4 +19,4 @@
             @endif
         </div>
     </div>
-</x-public.layout.app>
+</x-public-layout>

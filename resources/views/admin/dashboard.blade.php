@@ -1,8 +1,8 @@
-<x-admin.layout.app>
+<x-admin-layout>
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Painel Administrativo
-        </x-admin.layout.sections.page-title>
+        </x-admin.page-title>
     </x-slot>
 
     <div class="bg-white shadow-sm sm:rounded-lg">
@@ -10,4 +10,4 @@
             {{ __("You're logged in!") }}
         </div>
     </div>
-</x-admin.layout.app>
+</x-admin-layout>

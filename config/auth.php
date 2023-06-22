@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use Modules\Customer\Entities\Customer;
+
 return [
 
     /*
@@ -14,8 +17,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'customers',
+        'guard' => 'admin',
+        'passwords' => 'users',
     ],
 
     /*
@@ -66,17 +69,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
         'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
+            'model' => Customer::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

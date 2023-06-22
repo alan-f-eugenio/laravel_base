@@ -1,72 +1,72 @@
-<x-admin.layout.app>
+<x-admin-layout>
     <x-slot name="header">
-        <x-admin.layout.sections.page-title>
+        <x-admin.page-title>
             Páginas de Conteúdo
-        </x-admin.layout.sections.page-title>
-        <x-admin.layout.sections.page-button :href="route('admin.contentNavs.create')">
+        </x-admin.page-title>
+        <x-admin.page-button :href="route('admin.contentNavs.create')">
             Cadastrar novo
-        </x-admin.layout.sections.page-button>
+        </x-admin.page-button>
     </x-slot>
-    <x-admin.layout.sections.list-section>
-        <x-admin.layout.sections.filter gridCols="sm:grid-cols-2">
-            <x-admin.layout.sections.filter-select inpName="status" title="Status">
+    <x-admin.list-section>
+        <x-admin.filter gridCols="sm:grid-cols-2">
+            <x-admin.filter-select inpName="status" title="Status">
                 @foreach (\App\Helpers\DefaultStatus::array() as $statusKey => $statusValue)
-                    <x-admin.layout.sections.filter-select-option inpName="status" :inpValue="$statusKey"
+                    <x-admin.filter-select-option inpName="status" :inpValue="$statusKey"
                         :title="$statusValue" />
                 @endforeach
-            </x-admin.layout.sections.filter-select>
-            <x-admin.layout.sections.filter-input inpName="title" title="Título" placeholder="Título do banner" />
-        </x-admin.layout.sections.filter>
-        <x-admin.layout.sections.table :collection="$collection">
+            </x-admin.filter-select>
+            <x-admin.filter-input inpName="title" title="Título" placeholder="Título do banner" />
+        </x-admin.filter>
+        <x-admin.table :collection="$collection">
             <x-slot name="ths">
-                <x-admin.layout.sections.table-th>
+                <x-admin.table-th>
                     Título
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Cadastrado
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Alterado
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Status
-                </x-admin.layout.sections.table-th>
-                <x-admin.layout.sections.table-th>
+                </x-admin.table-th>
+                <x-admin.table-th>
                     Ações
-                </x-admin.layout.sections.table-th>
+                </x-admin.table-th>
             </x-slot>
             <x-slot name="tbody">
                 @forelse ($collection as $item)
                     <tr class="bg-white border-b">
-                        <x-admin.layout.sections.table-td :main="true">
+                        <x-admin.table-td :main="true">
                             {{ $item->title }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
+                        </x-admin.table-td>
+                        <x-admin.table-td>
                             {{ $item->created_at->format('d/m/Y H:i:s') }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
+                        </x-admin.table-td>
+                        <x-admin.table-td>
                             {{ $item->updated_at != $item->created_at ? $item->updated_at->format('d/m/Y H:i:s') : 'Nunca' }}
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-td>
-                            <x-admin.layout.sections.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()"
+                        </x-admin.table-td>
+                        <x-admin.table-td>
+                            <x-admin.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()"
                                 :falseTitle="$item->status->texto()" />
-                        </x-admin.layout.sections.table-td>
-                        <x-admin.layout.sections.table-actions-td>
-                            <x-admin.layout.sections.table-action :href="route('admin.contents.index', $item->id)" title="Listar Conteúdos">
+                        </x-admin.table-td>
+                        <x-admin.table-actions-td>
+                            <x-admin.table-action :href="route('admin.contents.index', $item->id)" title="Listar Conteúdos">
                                 <i class="text-base ti ti-list-details"></i>
-                            </x-admin.layout.sections.table-action>
-                            <x-admin.layout.sections.table-action :href="route('admin.contentNavs.edit', $item->id)" title="Editar">
+                            </x-admin.table-action>
+                            <x-admin.table-action :href="route('admin.contentNavs.edit', $item->id)" title="Editar">
                                 <i class="text-base ti ti-edit"></i>
-                            </x-admin.layout.sections.table-action>
-                            <x-admin.layout.sections.table-action :href="route('admin.contentNavs.destroy', $item->id)" title="Excluir" :destroy="true">
+                            </x-admin.table-action>
+                            <x-admin.table-action :href="route('admin.contentNavs.destroy', $item->id)" title="Excluir" :destroy="true">
                                 <i class="text-base ti ti-trash"></i>
-                            </x-admin.layout.sections.table-action>
-                        </x-admin.layout.sections.table-actions-td>
+                            </x-admin.table-action>
+                        </x-admin.table-actions-td>
                     </tr>
                 @empty
-                    <x-admin.layout.sections.table-no-result />
+                    <x-admin.table-no-result />
                 @endforelse
             </x-slot>
-        </x-admin.layout.sections.table>
-    </x-admin.layout.sections.list-section>
-</x-admin.layout.app>
+        </x-admin.table>
+    </x-admin.list-section>
+</x-admin-layout>
