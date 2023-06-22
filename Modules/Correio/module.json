@@ -1,0 +1,11 @@
+{
+    "name": "Correio",
+    "alias": "correio",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Correio\\Providers\\CorreioServiceProvider"
+    ],
+    "files": []
+}

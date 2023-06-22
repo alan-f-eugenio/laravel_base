@@ -1,0 +1,11 @@
+{
+    "name": "Bling",
+    "alias": "bling",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Bling\\Providers\\BlingServiceProvider"
+    ],
+    "files": []
+}

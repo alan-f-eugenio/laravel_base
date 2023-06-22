@@ -36,7 +36,6 @@ class AdminProductController extends Controller {
 
     public function create() {
         $item = new Product;
-
         $categories = ProductCategory::whereNull('id_parent')->where('status', DefaultStatus::STATUS_ATIVO->value)->with('allChilds')->get();
         $attributes = ProductAttribute::where('status', DefaultStatus::STATUS_ATIVO->value)->get();
 

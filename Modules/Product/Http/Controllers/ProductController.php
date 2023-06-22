@@ -31,6 +31,6 @@ class ProductController extends Controller {
     public function show(ProductCategory $product_category, Product $product) {
         $cart = CartController::storeOrUpdate();
 
-        return view('public.products.show', ['item' => $product, 'cart' => $cart, 'relatedProducts' => $product->relatedProducts]);
+        return view('product::public.product.show', ['item' => $product, 'cart' => $cart, 'relatedProducts' => $product->relatedProducts]);
     }
 }

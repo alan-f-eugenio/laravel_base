@@ -12,6 +12,8 @@ class ProductCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = "product_categories";
+
     protected $with = [
         // 'parent',
         // 'children',

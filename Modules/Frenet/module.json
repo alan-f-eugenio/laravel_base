@@ -1,0 +1,11 @@
+{
+    "name": "Frenet",
+    "alias": "frenet",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Frenet\\Providers\\FrenetServiceProvider"
+    ],
+    "files": []
+}

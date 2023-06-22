@@ -3,13 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Helpers\DefaultStatus;
 
-use App\Http\Controllers\Integrations\BlingController;
-use App\Http\Controllers\Public\PaymentController;
-use App\Http\Controllers\Public\ShippingController;
-
 use Modules\Banner\Entities\Banner;
+use Modules\Bling\Http\Controllers\BlingController;
 use Modules\Coupon\Http\Controllers\CouponController;
+use Modules\Payment\Http\Controllers\PaymentController;
 use Modules\Product\Entities\ProductCategory;
+use Modules\Shipping\Http\Controllers\ShippingController;
 
 Route::get('/', function () {
     $banner = Banner::first();
@@ -41,7 +40,7 @@ Route::get('shipping_calc', ShippingController::class)->name('shipping_calc');
 Route::get('coupon_calc', CouponController::class)->name('coupon_calc');
 Route::get('bling_produtos', [BlingController::class, 'getAllProducts'])->name('bling_produtos');
 
-Route::middleware('auth', 'auth.session')->group(function () {
+Route::middleware('auth:web', 'auth.session')->group(function () {
     Route::resource('checkout', PaymentController::class)->only('index', 'store')->names('payment');
 });
 

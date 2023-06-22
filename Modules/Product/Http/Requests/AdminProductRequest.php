@@ -6,6 +6,9 @@ use App\Helpers\DefaultStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Modules\Product\Entities\Product;
+use Modules\Product\Entities\ProductAttribute;
+use Modules\Product\Entities\ProductCategory;
 use Modules\Product\Helpers\ProductHasChildTypes;
 use Modules\Product\Helpers\ProductTypes;
 

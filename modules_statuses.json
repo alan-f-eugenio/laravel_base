@@ -7,5 +7,12 @@
     "Coupon": true,
     "Product": true,
     "Customer": true,
-    "Integration": true
+    "Integration": true,
+    "Shipping": true,
+    "Frenet": true,
+    "Correio": true,
+    "Payment": true,
+    "Pagseguro": true,
+    "Order": true,
+    "Bling": true
 }

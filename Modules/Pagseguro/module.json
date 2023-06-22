@@ -1,0 +1,11 @@
+{
+    "name": "Pagseguro",
+    "alias": "pagseguro",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Pagseguro\\Providers\\PagseguroServiceProvider"
+    ],
+    "files": []
+}
