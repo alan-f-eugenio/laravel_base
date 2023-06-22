@@ -2,12 +2,12 @@
 
 namespace Modules\Product\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Product\Database\factories\ProductAttributeOptFactory;
 
-class ProductAttributeOpt extends Model
-{
+class ProductAttributeOpt extends Model {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -22,12 +22,11 @@ class ProductAttributeOpt extends Model
         'id',
     ];
 
-    public function attribute() {
-        return $this->belongsTo(ProductAttribute::class);
+    protected static function newFactory() {
+        return ProductAttributeOptFactory::new();
     }
 
-    protected static function newFactory()
-    {
-        return \Modules\Product\Database\factories\ProductAttributeOptFactory::new();
+    public function attribute() {
+        return $this->belongsTo(ProductAttribute::class);
     }
 }

@@ -4,8 +4,7 @@ namespace Modules\Content\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ContentFactory extends Factory
-{
+class ContentFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,12 +17,11 @@ class ContentFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         $title = fake()->words(2, true);
 
         return [
-            'title' =>str($title)->title(),
+            'title' => str($title)->title(),
             'slug' => str($title)->slug(),
             'text' => '<p>' . implode('</p><p>', fake()->paragraphs(2)) . '</p>',
             'abstract' => '<p>' . fake()->paragraph(1) . '</p>',
@@ -31,4 +29,3 @@ class ContentFactory extends Factory
         ];
     }
 }
-

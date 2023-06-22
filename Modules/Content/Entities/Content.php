@@ -3,9 +3,10 @@
 namespace Modules\Content\Entities;
 
 use App\Helpers\DefaultStatus;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Content\Database\factories\ContentFactory;
 
 class Content extends Model {
     use HasFactory, SoftDeletes;
@@ -32,11 +33,11 @@ class Content extends Model {
         'status' => DefaultStatus::class,
     ];
 
-    public function nav() {
-        return $this->belongsTo(ContentNav::class, 'content_nav_id');
+    protected static function newFactory() {
+        return ContentFactory::new();
     }
 
-    protected static function newFactory() {
-        return \Modules\Content\Database\factories\ContentFactory::new();
+    public function nav() {
+        return $this->belongsTo(ContentNav::class, 'content_nav_id');
     }
 }

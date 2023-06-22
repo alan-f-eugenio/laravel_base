@@ -2,14 +2,12 @@
 
 namespace Modules\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Customer\Entities\CustomerAddress;
 use Modules\Customer\Helpers\CustomerAddressTypes;
 use Modules\Customer\Http\Requests\CustomerAddressRequest;
 
-class CustomerAddressController extends Controller
-{
+class CustomerAddressController extends Controller {
     public function index() {
         $customer = auth()->user();
 

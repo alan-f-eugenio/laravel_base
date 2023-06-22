@@ -6,8 +6,7 @@ use Illuminate\Routing\Controller;
 use Modules\Cart\Entities\Cart;
 use Modules\Cart\Entities\CartProduct;
 
-class CartController extends Controller
-{
+class CartController extends Controller {
     public static function storeOrUpdate(array $attributes = [], $oldSession = null) {
         $oldCart = $oldSession ? Cart::firstWhere('session_id', $oldSession) : null;
 

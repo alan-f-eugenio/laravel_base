@@ -6,15 +6,13 @@ use App\Helpers\DefaultStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class AdminContentRequest extends FormRequest
-{
+class AdminContentRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'status' => ['required', new Enum(DefaultStatus::class)],
             'title' => 'required|string|max:255',
@@ -35,8 +33,7 @@ class AdminContentRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 }

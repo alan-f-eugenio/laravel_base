@@ -4,8 +4,7 @@ namespace Modules\Product\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductAttributeFactory extends Factory
-{
+class ProductAttributeFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,12 +17,10 @@ class ProductAttributeFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
             'name' => fake()->word(),
             'has_files' => fake()->boolean(50) ? 1 : 0,
         ];
     }
 }
-

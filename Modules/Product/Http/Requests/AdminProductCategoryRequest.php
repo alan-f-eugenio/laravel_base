@@ -34,12 +34,6 @@ class AdminProductCategoryRequest extends FormRequest {
         ];
     }
 
-    protected function prepareForValidation(): void {
-        $this->merge([
-            'id_parent' => $this->id_parent ?: null,
-        ]);
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -47,5 +41,11 @@ class AdminProductCategoryRequest extends FormRequest {
      */
     public function authorize() {
         return true;
+    }
+
+    protected function prepareForValidation(): void {
+        $this->merge([
+            'id_parent' => $this->id_parent ?: null,
+        ]);
     }
 }

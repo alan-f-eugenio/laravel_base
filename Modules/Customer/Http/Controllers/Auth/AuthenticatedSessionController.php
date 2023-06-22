@@ -3,11 +3,11 @@
 namespace Modules\Customer\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Modules\Customer\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Modules\Customer\Http\Requests\Auth\LoginRequest;
 use Nwidart\Modules\Facades\Module;
 
 class AuthenticatedSessionController extends Controller {
@@ -25,7 +25,7 @@ class AuthenticatedSessionController extends Controller {
         $oldSession = session()->getId();
         $request->authenticate();
 
-        if(Module::has('Cart') && Module::isEnabled('Cart')){
+        if (Module::has('Cart') && Module::isEnabled('Cart')) {
             \Modules\Cart\Http\Controllers\CartController::storeOrUpdate(oldSession: $oldSession);
         }
 

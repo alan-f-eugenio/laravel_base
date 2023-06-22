@@ -2,11 +2,10 @@
 
 namespace Modules\Product\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class ProductSecondaryCategory extends Model
-{
+class ProductSecondaryCategory extends Model {
     use HasFactory;
 
     public $timestamps = false;

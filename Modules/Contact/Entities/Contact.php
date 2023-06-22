@@ -2,9 +2,10 @@
 
 namespace Modules\Contact\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Contact\Database\factories\ContactFactory;
 use Modules\Contact\Helpers\ContactStatus;
 
 class Contact extends Model {
@@ -26,8 +27,7 @@ class Contact extends Model {
         'seen' => ContactStatus::class,
     ];
 
-
     protected static function newFactory() {
-        return \Modules\Contact\Database\factories\ContactFactory::new();
+        return ContactFactory::new();
     }
 }

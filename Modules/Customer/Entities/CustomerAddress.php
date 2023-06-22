@@ -2,9 +2,10 @@
 
 namespace Modules\Customer\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Customer\Database\factories\CustomerAddressFactory;
 use Modules\Customer\Helpers\CustomerAddressTypes;
 
 class CustomerAddress extends Model {
@@ -27,11 +28,11 @@ class CustomerAddress extends Model {
         'type' => CustomerAddressTypes::class,
     ];
 
-    public function customer() {
-        $this->belongsTo(Customer::class, 'customer_id');
+    protected static function newFactory() {
+        return CustomerAddressFactory::new();
     }
 
-    protected static function newFactory() {
-        return \Modules\Customer\Database\factories\CustomerAddressFactory::new();
+    public function customer() {
+        $this->belongsTo(Customer::class, 'customer_id');
     }
 }

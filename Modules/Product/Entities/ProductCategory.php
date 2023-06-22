@@ -4,15 +4,15 @@ namespace Modules\Product\Entities;
 
 use App\Helpers\DefaultStatus;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Product\Database\factories\ProductCategoryFactory;
 
-class ProductCategory extends Model
-{
+class ProductCategory extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $table = "product_categories";
+    protected $table = 'product_categories';
 
     protected $with = [
         // 'parent',
@@ -37,6 +37,10 @@ class ProductCategory extends Model
     protected $casts = [
         'status' => DefaultStatus::class,
     ];
+
+    protected static function newFactory() {
+        return ProductCategoryFactory::new();
+    }
 
     public function parent() {
         return $this->belongsTo(ProductCategory::class, 'id', 'id_parent');
@@ -70,12 +74,7 @@ class ProductCategory extends Model
         } elseif ($this->secondaryProducts->count()) {
             return $this->secondaryProducts;
         } else {
-            return new Collection();
+            return new Collection;
         }
-    }
-
-    protected static function newFactory()
-    {
-        return \Modules\Product\Database\factories\ProductCategoryFactory::new();
     }
 }

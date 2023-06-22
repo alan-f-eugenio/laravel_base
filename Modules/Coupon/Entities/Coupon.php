@@ -4,9 +4,10 @@ namespace Modules\Coupon\Entities;
 
 use App\Helpers\DefaultStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Coupon\Database\factories\CouponFactory;
 use Modules\Coupon\Helpers\CouponDiscountTypes;
 
 class Coupon extends Model {
@@ -33,6 +34,10 @@ class Coupon extends Model {
         'discount_type' => CouponDiscountTypes::class,
     ];
 
+    protected static function newFactory() {
+        return CouponFactory::new();
+    }
+
     protected function discount(): Attribute {
         return Attribute::make(
             get: fn ($value, $attributes) => (isset($attributes['discount_type']) && $attributes['discount_type'] == CouponDiscountTypes::TYPE_AMOUNT->value
@@ -51,9 +56,5 @@ class Coupon extends Model {
         return Attribute::make(
             get: fn ($value) => str_replace('.', ',', $value),
         );
-    }
-
-    protected static function newFactory() {
-        return \Modules\Coupon\Database\factories\CouponFactory::new();
     }
 }

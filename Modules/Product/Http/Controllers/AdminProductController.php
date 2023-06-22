@@ -212,7 +212,7 @@ class AdminProductController extends Controller {
             }
         }
 
-        $listChilds = old('child_ordem') ? new Collection() : $product->childs;
+        $listChilds = old('child_ordem') ? new Collection : $product->childs;
         if (old('child_ordem')) {
             foreach (old('child_ordem') as $keyOpt => $optOrdem) {
                 $oldOpt = new Product([

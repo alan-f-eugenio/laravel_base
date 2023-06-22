@@ -3,19 +3,17 @@
 namespace Modules\Product\Database\Seeders;
 
 use DragonCode\Support\Facades\Filesystem\File;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Modules\Product\Entities\Product;
 
-class ProductDatabaseSeeder extends Seeder
-{
+class ProductDatabaseSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         Model::unguard();
 
         if (File::isDirectory(storage_path('app') . '/public/products')) {

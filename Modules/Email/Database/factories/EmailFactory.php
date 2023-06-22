@@ -4,8 +4,7 @@ namespace Modules\Email\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EmailFactory extends Factory
-{
+class EmailFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,12 +17,10 @@ class EmailFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
         ];
     }
 }
-

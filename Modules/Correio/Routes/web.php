@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('correio')->group(function() {
+Route::prefix('correio')->group(function () {
     Route::get('/', 'CorreioController@index');
 });

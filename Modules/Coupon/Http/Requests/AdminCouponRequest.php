@@ -30,18 +30,6 @@ class AdminCouponRequest extends FormRequest {
         ];
     }
 
-    protected function prepareForValidation(): void {
-        $this->merge([
-            'discount' => str_replace(',', '.', $this->discount),
-            'qtd' => $this->has('qtd') ? $this->qtd : null,
-            'value_min' => $this->has('value_min') ? str_replace(',', '.', $this->value_min) : null,
-            'value_max' => $this->has('value_max') ? str_replace(',', '.', $this->value_max) : null,
-            'date_start' => $this->has('date_start') ? $this->date_start : null,
-            'date_end' => $this->has('date_end') ? $this->date_end : null,
-            'first_buy' => $this->has('first_buy') ? 1 : 0,
-        ]);
-    }
-
     public function messages(): array {
         return [
             'date_end.after' => 'A data de expiração deve ser maior que a data de início',
@@ -56,5 +44,17 @@ class AdminCouponRequest extends FormRequest {
      */
     public function authorize() {
         return true;
+    }
+
+    protected function prepareForValidation(): void {
+        $this->merge([
+            'discount' => str_replace(',', '.', $this->discount),
+            'qtd' => $this->has('qtd') ? $this->qtd : null,
+            'value_min' => $this->has('value_min') ? str_replace(',', '.', $this->value_min) : null,
+            'value_max' => $this->has('value_max') ? str_replace(',', '.', $this->value_max) : null,
+            'date_start' => $this->has('date_start') ? $this->date_start : null,
+            'date_end' => $this->has('date_end') ? $this->date_end : null,
+            'first_buy' => $this->has('first_buy') ? 1 : 0,
+        ]);
     }
 }

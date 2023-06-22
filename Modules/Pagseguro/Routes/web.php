@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('pagseguro')->group(function() {
+Route::prefix('pagseguro')->group(function () {
     Route::get('/', 'PagseguroController@index');
 });

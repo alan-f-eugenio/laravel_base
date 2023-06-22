@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
-
 use App\Http\Controllers\Admin\DefineController as AdminDefineController;
 use App\Http\Controllers\Admin\IntegrationController as AdminIntegrationController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-
+use Illuminate\Support\Facades\Route;
 use Modules\Banner\Http\Controllers\AdminBannerController;
 use Modules\Cart\Http\Controllers\AdminCartController;
 use Modules\Contact\Http\Controllers\AdminContactController;

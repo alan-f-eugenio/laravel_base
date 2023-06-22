@@ -8,15 +8,13 @@ use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Modules\Customer\Helpers\CustomerPersons;
 
-class CustomerRequest extends FormRequest
-{
+class CustomerRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'person' => ['required', new Enum(CustomerPersons::class)],
             'fullname' => 'required|string|max:255',
@@ -37,8 +35,7 @@ class CustomerRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 }

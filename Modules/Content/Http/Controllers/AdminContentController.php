@@ -25,6 +25,7 @@ class AdminContentController extends Controller {
 
     public function create(ContentNav $nav) {
         $item = new Content;
+
         return view('content::admin.content.create_edit', ['item' => $item, 'nav' => $nav]);
     }
 

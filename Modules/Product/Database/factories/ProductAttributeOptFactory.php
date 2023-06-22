@@ -4,8 +4,7 @@ namespace Modules\Product\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductAttributeOptFactory extends Factory
-{
+class ProductAttributeOptFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,11 +17,9 @@ class ProductAttributeOptFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
             'name' => fake()->unique()->word(),
         ];
     }
 }
-

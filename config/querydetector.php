@@ -8,7 +8,7 @@ if (is_dir('../Modules/Product')) {
         \Modules\Product\Entities\Product::class => [
             \Modules\Product\Entities\ProductAttribute::class,
             \Modules\Product\Entities\ProductAttributeOpt::class,
-        ]
+        ],
     ];
 }
 

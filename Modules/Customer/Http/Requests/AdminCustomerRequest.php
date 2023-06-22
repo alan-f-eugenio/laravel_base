@@ -10,15 +10,13 @@ use Illuminate\Validation\Rules\Password;
 use Modules\Customer\Entities\Customer;
 use Modules\Customer\Helpers\CustomerPersons;
 
-class AdminCustomerRequest extends FormRequest
-{
+class AdminCustomerRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'status' => ['required', new Enum(DefaultStatus::class)],
             'person' => ['required', new Enum(CustomerPersons::class)],
@@ -40,8 +38,7 @@ class AdminCustomerRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 }

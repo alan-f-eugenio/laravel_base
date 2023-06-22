@@ -2,12 +2,10 @@
 
 namespace Modules\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Customer\Http\Requests\CustomerPasswordRequest;
 
-class CustomerPasswordController extends Controller
-{
+class CustomerPasswordController extends Controller {
     public function edit() {
         return view('customer::public.customerPassword.edit');
     }

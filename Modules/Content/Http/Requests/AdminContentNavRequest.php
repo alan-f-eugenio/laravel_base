@@ -7,15 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Content\Helpers\ContentNavTypes;
 
-class AdminContentNavRequest extends FormRequest
-{
+class AdminContentNavRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'status' => ['required', new Enum(DefaultStatus::class)],
             'title' => 'required|string|max:255',
@@ -28,8 +26,7 @@ class AdminContentNavRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 }

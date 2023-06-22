@@ -3,13 +3,13 @@
 namespace Modules\Content\Entities;
 
 use App\Helpers\DefaultStatus;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Content\Database\factories\ContentNavFactory;
 use Modules\Content\Helpers\ContentNavTypes;
 
-class ContentNav extends Model
-{
+class ContentNav extends Model {
     use HasFactory, SoftDeletes;
 
     protected $with = [
@@ -31,12 +31,11 @@ class ContentNav extends Model
         'type' => ContentNavTypes::class,
     ];
 
-    public function contents() {
-        return $this->hasMany(Content::class);
+    protected static function newFactory() {
+        return ContentNavFactory::new();
     }
 
-    protected static function newFactory()
-    {
-        return \Modules\Content\Database\factories\ContentNavFactory::new();
+    public function contents() {
+        return $this->hasMany(Content::class);
     }
 }

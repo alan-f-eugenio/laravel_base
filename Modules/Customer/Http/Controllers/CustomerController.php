@@ -3,10 +3,9 @@
 namespace Modules\Customer\Http\Controllers;
 
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\Customer\Entities\Customer;
 use Modules\Customer\Entities\CustomerAddress;
 use Modules\Customer\Helpers\CustomerPersons;
@@ -14,15 +13,15 @@ use Modules\Customer\Http\Requests\CustomerAddressRequest;
 use Modules\Customer\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller {
-
     public function create() {
-        $item = new Customer();
+        $item = new Customer;
         $customerPersons = CustomerPersons::array();
+
         return view('customer::public.customer.create', [
             'item' => $item,
             'personFisica' => (old('person') ?: $item->person?->value) == CustomerPersons::PESSOA_FISICA->value || !$item->id,
-            'address' => new CustomerAddress(),
-            'customerPersons' => $customerPersons
+            'address' => new CustomerAddress,
+            'customerPersons' => $customerPersons,
         ]);
     }
 
@@ -48,10 +47,11 @@ class CustomerController extends Controller {
     public function edit() {
         $customer = auth()->user();
         $customerPersons = CustomerPersons::array();
+
         return view('customer::public.customer.edit', [
             'item' => $customer,
             'personFisica' => $customer->person->value == CustomerPersons::PESSOA_FISICA->value,
-            'customerPersons' => $customerPersons
+            'customerPersons' => $customerPersons,
         ]);
     }
 

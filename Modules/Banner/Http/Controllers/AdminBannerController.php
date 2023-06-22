@@ -26,13 +26,14 @@ class AdminBannerController extends Controller {
         $bannerLocals = BannerLocal::all();
 
         return view('banner::admin.index', ['collection' => $query->get()->mapToGroups(function ($item) {
-            return [$item->local->title => $item,];
+            return [$item->local->title => $item];
         }), 'bannerLocals' => $bannerLocals]);
     }
 
     public function create() {
         $item = new Banner;
         $bannerLocals = BannerLocal::all();
+
         return view('banner::admin.create_edit', ['item' => $item, 'bannerLocals' => $bannerLocals]);
     }
 
@@ -50,6 +51,7 @@ class AdminBannerController extends Controller {
 
     public function edit(Banner $banner) {
         $bannerLocals = BannerLocal::all();
+
         return view('banner::admin.create_edit', ['item' => $banner, 'bannerLocals' => $bannerLocals]);
     }
 

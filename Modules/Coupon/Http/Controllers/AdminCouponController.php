@@ -31,6 +31,7 @@ class AdminCouponController extends Controller {
         $item = new Coupon;
         $couponDiscountTypes = CouponDiscountTypes::array();
         $typePercentValue = CouponDiscountTypes::TYPE_PERCENT->value;
+
         return view('coupon::admin.create_edit', [
             'item' => $item,
             'hasDateStartLimit' => (!old('hasDateStartLimit') && old('date_start')) || $item->date_start,
@@ -39,7 +40,7 @@ class AdminCouponController extends Controller {
             'hasValueMinLimit' => (!old('hasValueMinLimit') && old('value_min')) || $item->value_min,
             'hasValueMaxLimit' => (!old('hasValueMaxLimit') && old('value_max')) || $item->value_max,
             'couponDiscountTypes' => $couponDiscountTypes,
-            'typePercentValue' => $typePercentValue
+            'typePercentValue' => $typePercentValue,
         ]);
     }
 
@@ -56,6 +57,7 @@ class AdminCouponController extends Controller {
     public function edit(Coupon $coupon) {
         $couponDiscountTypes = CouponDiscountTypes::array();
         $typePercentValue = CouponDiscountTypes::TYPE_PERCENT->value;
+
         return view('coupon::admin.create_edit', [
             'item' => $coupon,
             'hasDateStartLimit' => (!old('hasDateStartLimit') && old('date_start')) || $coupon->date_start,
@@ -64,7 +66,7 @@ class AdminCouponController extends Controller {
             'hasValueMinLimit' => (!old('hasValueMinLimit') && old('value_min')) || $coupon->value_min,
             'hasValueMaxLimit' => (!old('hasValueMaxLimit') && old('value_max')) || $coupon->value_max,
             'couponDiscountTypes' => $couponDiscountTypes,
-            'typePercentValue' => $typePercentValue
+            'typePercentValue' => $typePercentValue,
         ]);
     }
 

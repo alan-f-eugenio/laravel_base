@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('frenet')->group(function() {
+Route::prefix('frenet')->group(function () {
     Route::get('/', 'FrenetController@index');
 });

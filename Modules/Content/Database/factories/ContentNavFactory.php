@@ -4,8 +4,7 @@ namespace Modules\Content\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ContentNavFactory extends Factory
-{
+class ContentNavFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,14 +17,12 @@ class ContentNavFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         $title = fake()->words(2, true);
 
         return [
-            'title' =>str($title)->title(),
+            'title' => str($title)->title(),
             'slug' => str($title)->slug(),
         ];
     }
 }
-

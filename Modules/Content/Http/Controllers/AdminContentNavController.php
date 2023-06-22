@@ -25,6 +25,7 @@ class AdminContentNavController extends Controller {
     public function create() {
         $item = new ContentNav;
         $contentNavTypes = ContentNavTypes::array();
+
         return view('content::admin.contentNav.create_edit', ['item' => $item, 'contentNavTypes' => $contentNavTypes]);
     }
 
@@ -41,6 +42,7 @@ class AdminContentNavController extends Controller {
 
     public function edit(ContentNav $contentNav) {
         $contentNavTypes = ContentNavTypes::array();
+
         return view('content::admin.contentNav.create_edit', ['item' => $contentNav, 'contentNavTypes' => $contentNavTypes]);
     }
 

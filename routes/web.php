@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Helpers\DefaultStatus;
-
+use Illuminate\Support\Facades\Route;
 use Modules\Banner\Entities\Banner;
 use Modules\Bling\Http\Controllers\BlingController;
 use Modules\Coupon\Http\Controllers\CouponController;

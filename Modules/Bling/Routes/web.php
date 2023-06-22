@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('bling')->group(function() {
+Route::prefix('bling')->group(function () {
     Route::get('/', 'BlingController@index');
 });

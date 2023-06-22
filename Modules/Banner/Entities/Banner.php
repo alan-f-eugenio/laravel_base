@@ -3,9 +3,10 @@
 namespace Modules\Banner\Entities;
 
 use App\Helpers\DefaultStatus;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Banner\Database\factories\BannerFactory;
 
 class Banner extends Model {
     use HasFactory, SoftDeletes;
@@ -29,11 +30,11 @@ class Banner extends Model {
         'status' => DefaultStatus::class,
     ];
 
-    public function local() {
-        return $this->belongsTo(BannerLocal::class, 'local_id');
+    protected static function newFactory() {
+        return BannerFactory::new();
     }
 
-    protected static function newFactory() {
-        return \Modules\Banner\Database\factories\BannerFactory::new();
+    public function local() {
+        return $this->belongsTo(BannerLocal::class, 'local_id');
     }
 }

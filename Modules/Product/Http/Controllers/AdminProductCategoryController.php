@@ -9,17 +9,22 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Product\Entities\ProductCategory;
 use Modules\Product\Http\Requests\AdminProductCategoryRequest;
 
-class AdminProductCategoryController extends Controller
-{
-    public function index()
-    {
+class AdminProductCategoryController extends Controller {
+    public static function recursiveCategoryChild($product_category, $treeList) {
+        foreach ($product_category->allChilds as $childCat) {
+            $treeList = self::recursiveCategoryChild($childCat, $treeList);
+        }
+
+        return [$product_category->id, ...$treeList];
+    }
+
+    public function index() {
         $collection = ProductCategory::whereNull('id_parent')->with('allChilds')->orderBy('ordem', 'asc')->get();
 
         return view('product::admin.product_category.index', ['collection' => $collection]);
     }
 
-    public function create()
-    {
+    public function create() {
         $item = new ProductCategory;
 
         $categories = ProductCategory::whereNull('id_parent')->with('allChilds')->get();
@@ -27,8 +32,7 @@ class AdminProductCategoryController extends Controller
         return view('product::admin.product_category.create_edit', ['item' => $item, 'categories' => $categories, 'treeList' => []]);
     }
 
-    public function store(AdminProductCategoryRequest $request)
-    {
+    public function store(AdminProductCategoryRequest $request) {
         $attributes = $request->validated();
 
         if (isset($attributes['filename'])) {
@@ -49,8 +53,7 @@ class AdminProductCategoryController extends Controller
         return view('product::admin.product_category.create_edit', ['item' => $product_category, 'categories' => $categories, 'treeList' => $treeList]);
     }
 
-    public function update(AdminProductCategoryRequest $request, ProductCategory $product_category)
-    {
+    public function update(AdminProductCategoryRequest $request, ProductCategory $product_category) {
         $attributes = $request->validated();
 
         if (isset($attributes['filename'])) {
@@ -80,14 +83,6 @@ class AdminProductCategoryController extends Controller
         if ($returnView) {
             return redirect()->route('admin.product_categories.index')->with('message', ['type' => 'success', 'text' => 'Categoria removida com sucesso.']);
         }
-    }
-
-    public static function recursiveCategoryChild($product_category, $treeList) {
-        foreach ($product_category->allChilds as $childCat) {
-            $treeList = self::recursiveCategoryChild($childCat, $treeList);
-        }
-
-        return [$product_category->id, ...$treeList];
     }
 
     public function updateOrdenation(Request $request) {

@@ -2,21 +2,19 @@
 
 namespace Modules\Content\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Modules\Content\Entities\Content;
 use Modules\Content\Entities\ContentNav;
 
-class ContentDatabaseSeeder extends Seeder
-{
+class ContentDatabaseSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         Model::unguard();
 
         if (File::isDirectory(storage_path('app') . '/public/contents')) {

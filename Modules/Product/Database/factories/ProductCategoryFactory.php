@@ -4,8 +4,7 @@ namespace Modules\Product\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductCategoryFactory extends Factory
-{
+class ProductCategoryFactory extends Factory {
     /**
      * The name of the factory's corresponding model.
      *
@@ -18,8 +17,7 @@ class ProductCategoryFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         $name = fake()->words(3, true);
 
         return [
@@ -31,4 +29,3 @@ class ProductCategoryFactory extends Factory
         ];
     }
 }
-

@@ -27,7 +27,7 @@ class ShippingController extends Controller {
             }
         }
 
-        $shippings = self::getShippings($cep, $listShippProducts, $total, $request->has("inputs"));
+        $shippings = self::getShippings($cep, $listShippProducts, $total, $request->has('inputs'));
 
         $lowestValue = $shippings['lowestValue'];
         $htmlShipping = $shippings['html'];
@@ -91,7 +91,7 @@ class ShippingController extends Controller {
 
         if (Module::has('Frenet') && Module::isEnabled('Frenet') && $shippingMethod == 'frenet') {
             $shippingData = \Modules\Frenet\Http\Controllers\FrenetController::calcShipping($cep, $listShippProducts, $total, shippingCode: $shippingCode);
-        } else if (Module::has('Correio') && Module::isEnabled('Correio') && $shippingMethod == 'correios') {
+        } elseif (Module::has('Correio') && Module::isEnabled('Correio') && $shippingMethod == 'correios') {
             $shippingData = \Modules\Correio\Http\Controllers\CorreioController::calcShipping($cep, $listShippProducts, $total, shippingCode: $shippingCode);
         }
 

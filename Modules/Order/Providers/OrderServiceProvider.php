@@ -2,18 +2,17 @@
 
 namespace Modules\Order\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
-class OrderServiceProvider extends ServiceProvider
-{
+class OrderServiceProvider extends ServiceProvider {
     /**
-     * @var string $moduleName
+     * @var string
      */
     protected $moduleName = 'Order';
 
     /**
-     * @var string $moduleNameLower
+     * @var string
      */
     protected $moduleNameLower = 'order';
 
@@ -22,8 +21,7 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -35,24 +33,8 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         $this->app->register(RouteServiceProvider::class);
-    }
-
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
     }
 
     /**
@@ -60,14 +42,13 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerViews()
-    {
+    public function registerViews() {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
         $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePath => $viewPath,
         ], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
@@ -78,8 +59,7 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerTranslations()
-    {
+    public function registerTranslations() {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if (is_dir($langPath)) {
@@ -96,19 +76,32 @@ class OrderServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
-    {
+    public function provides() {
         return [];
     }
 
-    private function getPublishableViewPaths(): array
-    {
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig() {
+        $this->publishes([
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+        );
+    }
+
+    private function getPublishableViewPaths(): array {
         $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
+        foreach (Config::get('view.paths') as $path) {
             if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
                 $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
         }
+
         return $paths;
     }
 }

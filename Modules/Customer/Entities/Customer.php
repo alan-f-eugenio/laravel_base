@@ -3,15 +3,14 @@
 namespace Modules\Customer\Entities;
 
 use App\Helpers\DefaultStatus;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Customer\Database\factories\CustomerFactory;
 use Modules\Customer\Helpers\CustomerAddressTypes;
 use Modules\Customer\Helpers\CustomerPersons;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Customer extends Authenticatable
-{
+class Customer extends Authenticatable {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -41,6 +40,10 @@ class Customer extends Authenticatable
         'person' => CustomerPersons::class,
     ];
 
+    protected static function newFactory() {
+        return CustomerFactory::new();
+    }
+
     public function addresses() {
         return $this->hasMany(CustomerAddress::class, 'customer_id');
     }
@@ -51,10 +54,5 @@ class Customer extends Authenticatable
 
     public function secondaryAddress() {
         return $this->hasOne(CustomerAddress::class, 'customer_id')->where('type', CustomerAddressTypes::TYPE_ENTREGA->value);
-    }
-
-    protected static function newFactory()
-    {
-        return \Modules\Customer\Database\factories\CustomerFactory::new();
     }
 }

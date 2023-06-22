@@ -87,6 +87,15 @@ class AdminProductChildRequest extends FormRequest {
         ];
     }
 
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize() {
+        return true;
+    }
+
     protected function prepareForValidation(): void {
         // dump($this);
         $childPriceCosts = null;
@@ -154,14 +163,5 @@ class AdminProductChildRequest extends FormRequest {
             'child_depth' => $childDepths,
             'child_promo_value' => $childPromo_values,
         ]);
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize() {
-        return true;
     }
 }

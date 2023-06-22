@@ -29,7 +29,7 @@ class AdminProductAttributeController extends Controller {
     public function create() {
         $item = new ProductAttribute;
 
-        $listOptions = old('option_ordem') ? new Collection() : $item->options;
+        $listOptions = old('option_ordem') ? new Collection : $item->options;
         if (old('option_ordem')) {
             foreach (old('option_ordem') as $keyOpt => $optOrdem) {
                 $oldOpt = new ProductAttributeOpt([

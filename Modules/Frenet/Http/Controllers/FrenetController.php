@@ -9,14 +9,13 @@ use GuzzleHttp\Psr7\Request;
 // use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class FrenetController extends Controller
-{
+class FrenetController extends Controller {
     public static function calcShipping($cep, $listShippProducts, $total, $inputs = false, $shippingCode = false) {
         if (config('integrations.frete.frenet')['status'] != DefaultStatus::STATUS_ATIVO) {
             return false;
         }
 
-        $client = new Client();
+        $client = new Client;
         $headers = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -90,7 +89,6 @@ class FrenetController extends Controller
                 }
             }
         }
-
 
         if ($shippingCode) {
             return ['name' => $shippingName, 'value' => $lowestValue];

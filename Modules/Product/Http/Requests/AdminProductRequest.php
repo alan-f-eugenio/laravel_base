@@ -55,6 +55,15 @@ class AdminProductRequest extends FormRequest {
         ];
     }
 
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize() {
+        return true;
+    }
+
     protected function prepareForValidation(): void {
         $this->merge([
             'price_cost' => $this->has('price_cost') ? str_replace('R$ ', '', str_replace(',', '.', $this->price_cost)) : null,
@@ -68,14 +77,5 @@ class AdminProductRequest extends FormRequest {
             'product_att1_id' => $this->has('product_att1_id') && $this->has('child_opt1') ? $this->product_att1_id : null,
             'product_att2_id' => $this->has('product_att2_id') && $this->has('child_opt2') ? $this->product_att1_id : null,
         ]);
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize() {
-        return true;
     }
 }

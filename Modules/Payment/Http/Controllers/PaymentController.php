@@ -3,6 +3,7 @@
 namespace Modules\Payment\Http\Controllers;
 
 use App\Helpers\DefaultStatus;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Vite;
@@ -45,7 +46,7 @@ class PaymentController extends Controller {
         $customer = auth()->user();
         $cart = CartController::storeOrUpdate();
         $coupon = $cart->coupon;
-        $shippingData = explode("__", $request->shipping);
+        $shippingData = explode('__', $request->shipping);
         $address = $customer->addresses->where('id', $request->address)->first();
         $cep = preg_replace('/[^0-9]/', '', $address->cep);
 
@@ -63,7 +64,6 @@ class PaymentController extends Controller {
                 $paymentMethod = $keyPM;
             }
         }
-
 
         $shippingMethod = null;
         $shippingCalcData = null;
@@ -115,14 +115,14 @@ class PaymentController extends Controller {
 
         if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') && $paymentMethod == 'pagseguro') {
             \PagSeguro\Library::initialize();
-            \PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-            \PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
-            \PagSeguro\Configuration\Configure::setEnvironment("sandbox");
+            \PagSeguro\Library::cmsVersion()->setName('Nome')->setRelease('1.0.0');
+            \PagSeguro\Library::moduleVersion()->setName('Nome')->setRelease('1.0.0');
+            \PagSeguro\Configuration\Configure::setEnvironment('sandbox');
             \PagSeguro\Configuration\Configure::setLog(true, storage_path('logs/pagseguro.log'));
 
-            $payment = new \PagSeguro\Domains\Requests\Payment();
+            $payment = new \PagSeguro\Domains\Requests\Payment;
 
-            $payment->setCurrency("BRL");
+            $payment->setCurrency('BRL');
             $payment->setReference($order->id);
 
             $payment->setSender()->setName($customer->fullname);
@@ -156,7 +156,7 @@ class PaymentController extends Controller {
             }
             $payment->setShipping()->setCost()->withParameters($order->shipping_value);
             $payment->setShipping()->setType()->withParameters(\PagSeguro\Enum\Shipping\Type::NOT_SPECIFIED);
-            $payment->setExtraAmount(- ($discount));
+            $payment->setExtraAmount(-($discount));
 
             $payment->addParameter()->withArray(['notificationURL', url('/') . '/paymentNotification/pagseguro']);
             $payment->setRedirectUrl(url('/'));
@@ -173,11 +173,11 @@ class PaymentController extends Controller {
 
                 $order->update([
                     'payment_link' => $result,
-                    'payment_code' => substr($result, strpos($result, "code=") + 5)
+                    'payment_code' => substr($result, strpos($result, 'code=') + 5),
                 ]);
 
                 return redirect($result);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 dd($e);
             }
         }
@@ -189,11 +189,11 @@ class PaymentController extends Controller {
         //     'path' => storage_path('logs/pagseguro.log'),
         // ])->info(print_r([$request->all(), $request->path(), $request->method()], true));
 
-        if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') &&  $request->has('notificationType') && $request->has('notificationCode') && $request->notificationType == 'transaction') {
+        if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') && $request->has('notificationType') && $request->has('notificationCode') && $request->notificationType == 'transaction') {
             \PagSeguro\Library::initialize();
-            \PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-            \PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
-            \PagSeguro\Configuration\Configure::setEnvironment("sandbox");
+            \PagSeguro\Library::cmsVersion()->setName('Nome')->setRelease('1.0.0');
+            \PagSeguro\Library::moduleVersion()->setName('Nome')->setRelease('1.0.0');
+            \PagSeguro\Configuration\Configure::setEnvironment('sandbox');
             \PagSeguro\Configuration\Configure::setLog(true, storage_path('logs/pagseguro.log'));
 
             $credentials = new \PagSeguro\Domains\AccountCredentials(
@@ -212,27 +212,27 @@ class PaymentController extends Controller {
                     //     'path' => storage_path('logs/pagseguro.log'),
                     // ])->info(print_r($response, true));
 
-                    $order = Order::where('id',  $response->getReference())->firstOrFail();
+                    $order = Order::where('id', $response->getReference())->firstOrFail();
 
                     if ($response->getStatus() == PagSeguroStatus::STATUS_WAITING_PAYMENT->value) {
                         $order->update([
-                            'tid' => $response->getCode()
+                            'tid' => $response->getCode(),
                         ]);
-                    } else if ($response->getStatus() == PagSeguroStatus::STATUS_PAID->value) {
+                    } elseif ($response->getStatus() == PagSeguroStatus::STATUS_PAID->value) {
                         $order->update([
-                            'status' => OrderStatus::STATUS_PAGAMENTO_REALIZADO
+                            'status' => OrderStatus::STATUS_PAGAMENTO_REALIZADO,
                         ]);
-                    } else if (
+                    } elseif (
                         $response->getStatus() == PagSeguroStatus::STATUS_REFUNDED->value ||
                         $response->getStatus() == PagSeguroStatus::STATUS_CANCELLED->value
                     ) {
                         $order->update([
-                            'status' => OrderStatus::STATUS_CANCELADO
+                            'status' => OrderStatus::STATUS_CANCELADO,
                         ]);
                     }
                 }
-            } catch (\Exception $e) {
-                die($e->getMessage());
+            } catch (Exception $e) {
+                exit($e->getMessage());
             }
         }
     }

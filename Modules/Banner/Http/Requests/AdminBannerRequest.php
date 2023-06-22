@@ -26,15 +26,6 @@ class AdminBannerRequest extends FormRequest {
         ];
     }
 
-    protected function prepareForValidation() {
-        if (!$this->has('ordem')) {
-            $lastBanner = Banner::where('local_id', $this->local_id)->orderBy('ordem', 'desc')->first();
-            $this->merge([
-                'ordem' => $lastBanner ? $lastBanner->ordem + 1 : 1,
-            ]);
-        }
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -42,5 +33,14 @@ class AdminBannerRequest extends FormRequest {
      */
     public function authorize() {
         return true;
+    }
+
+    protected function prepareForValidation() {
+        if (!$this->has('ordem')) {
+            $lastBanner = Banner::where('local_id', $this->local_id)->orderBy('ordem', 'desc')->first();
+            $this->merge([
+                'ordem' => $lastBanner ? $lastBanner->ordem + 1 : 1,
+            ]);
+        }
     }
 }

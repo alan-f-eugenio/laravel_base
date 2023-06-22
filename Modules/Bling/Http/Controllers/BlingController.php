@@ -48,7 +48,7 @@ class BlingController extends Controller {
         dump(Carbon::now());
         for ($x = 1; $x <= $page; $x++) {
             $url = 'https://bling.com.br/Api/v2/produtos/page=' . $page . '/json/';
-            $client = new Client();
+            $client = new Client;
             try {
                 $guzzle_request = new Request('GET', $url . '&apikey=' .
                     config('integrations.erp.bling')['defines']['token'] .

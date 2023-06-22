@@ -4,16 +4,16 @@ namespace Modules\Product\Entities;
 
 use App\Helpers\DefaultStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Product\Database\factories\ProductFactory;
 use Modules\Product\Helpers\ProductHasChildTypes;
 use Modules\Product\Helpers\ProductTypes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Product extends Model
-{
+class Product extends Model {
     use HasFactory, SoftDeletes, LogsActivity;
 
     protected $with = [
@@ -70,6 +70,10 @@ class Product extends Model
         'type' => ProductTypes::class,
         'has_child' => ProductHasChildTypes::class,
     ];
+
+    protected static function newFactory() {
+        return ProductFactory::new();
+    }
 
     public function getActivitylogOptions(): LogOptions {
         return LogOptions::defaults()
@@ -159,10 +163,5 @@ class Product extends Model
         return Attribute::make(
             get: fn ($value) => str_replace('.', ',', $value),
         );
-    }
-
-    protected static function newFactory()
-    {
-        return \Modules\Product\Database\factories\ProductFactory::new();
     }
 }

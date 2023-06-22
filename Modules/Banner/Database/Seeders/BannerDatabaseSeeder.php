@@ -2,8 +2,8 @@
 
 namespace Modules\Banner\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Modules\Banner\Entities\Banner;
 use Modules\Banner\Entities\BannerLocal;

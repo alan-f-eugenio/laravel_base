@@ -3,10 +3,10 @@
 namespace Modules\Customer\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\Customer\Entities\Customer;
 use Modules\Customer\Entities\CustomerAddress;
 use Modules\Customer\Helpers\CustomerAddressTypes;
@@ -59,11 +59,12 @@ class AdminCustomerController extends Controller {
     public function create() {
         $item = new Customer;
         $customerPersons = CustomerPersons::array();
+
         return view('customer::admin.customer.create_edit', [
             'item' => $item,
             'personFisica' => (old('person') ?: $item->person?->value) == CustomerPersons::PESSOA_FISICA->value || !$item->id,
-            'address' => new CustomerAddress(),
-            'customerPersons' => $customerPersons
+            'address' => new CustomerAddress,
+            'customerPersons' => $customerPersons,
         ]);
     }
 
@@ -85,11 +86,12 @@ class AdminCustomerController extends Controller {
 
     public function edit(Customer $customer) {
         $customerPersons = CustomerPersons::array();
+
         return view('customer::admin.customer.create_edit', [
             'item' => $customer,
             'personFisica' => (old('person') ?: $customer->person?->value) == CustomerPersons::PESSOA_FISICA->value || !$customer->id,
             'address' => $customer->mainAddress,
-            'customerPersons' => $customerPersons
+            'customerPersons' => $customerPersons,
         ]);
     }
 
