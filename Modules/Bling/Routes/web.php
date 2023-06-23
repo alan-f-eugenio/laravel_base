@@ -11,6 +11,7 @@
 |
 */
 
-Route::prefix('bling')->group(function () {
-    Route::get('/', 'BlingController@index');
-});
+use Illuminate\Support\Facades\Route;
+use Modules\Bling\Http\Controllers\BlingController;
+
+Route::get('bling_produtos', [BlingController::class, 'getAllProducts'])->name('bling_produtos');

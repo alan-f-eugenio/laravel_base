@@ -11,6 +11,11 @@
 |
 */
 
-Route::prefix('payment')->group(function () {
-    Route::get('/', 'PaymentController@index');
+use Illuminate\Support\Facades\Route;
+use Modules\Payment\Http\Controllers\PaymentController;
+
+Route::middleware('auth:web', 'auth.session')->group(function () {
+    Route::resource('checkout', PaymentController::class)->only('index', 'store')->names('payment');
 });
+
+Route::post('paymentNotification/{paymentMethod}', [PaymentController::class, 'update'])->name('paymentNotification');

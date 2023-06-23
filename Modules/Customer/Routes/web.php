@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Customer\Http\Controllers\AdminCustomerController;
 use Modules\Customer\Http\Controllers\Auth\AuthenticatedSessionController;
 use Modules\Customer\Http\Controllers\Auth\ConfirmablePasswordController;
 use Modules\Customer\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -31,6 +32,11 @@ Route::middleware('auth:web', 'auth.session')->prefix('minha-conta')->group(func
     Route::post('endereco/cadastrar', [CustomerAddressController::class, 'store'])->name('customer_address.store');
     Route::get('endereco/{customer_address}', [CustomerAddressController::class, 'edit'])->name('customer_address.edit');
     Route::put('endereco/{customer_address}', [CustomerAddressController::class, 'update'])->name('customer_address.update');
+});
+
+Route::prefix('admin')->middleware('auth:admin', 'auth.session')->group(function () {
+    Route::get('customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index')->middleware('stripEmptyParams');
+    Route::resource('customers', AdminCustomerController::class)->except('index', 'show')->names('admin.customers');
 });
 
 Route::middleware('guest:web')->group(function () {

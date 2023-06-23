@@ -11,6 +11,7 @@
 |
 */
 
-Route::prefix('shipping')->group(function () {
-    Route::get('/', 'ShippingController@index');
-});
+use Illuminate\Support\Facades\Route;
+use Modules\Shipping\Http\Controllers\ShippingController;
+
+Route::get('shipping_calc', ShippingController::class)->name('shipping_calc');
