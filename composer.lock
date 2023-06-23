@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c50e42d448572fb53f6cf5647cb147f3",
+    "content-hash": "ff6b0a126ed2accce562ee294f9582dc",
     "packages": [
         {
             "name": "brick/math",
@@ -6691,16 +6691,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "12.22.0",
+            "version": "12.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "b5e3944e81fa3a4858739eef81282b741422ed81"
+                "reference": "b2d02fd28b57babf6fb26526b97b5742d5bf013f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/b5e3944e81fa3a4858739eef81282b741422ed81",
-                "reference": "b5e3944e81fa3a4858739eef81282b741422ed81",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/b2d02fd28b57babf6fb26526b97b5742d5bf013f",
+                "reference": "b2d02fd28b57babf6fb26526b97b5742d5bf013f",
                 "shasum": ""
             },
             "require": {
@@ -6753,7 +6753,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-06-20T08:30:39+00:00"
+            "time": "2023-06-23T10:49:52+00:00"
         },
         {
             "name": "laravel-lang/publisher",
@@ -9313,7 +9313,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^7.1.3||^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

@@ -78,13 +78,12 @@
                                 const calcCoupon = document.querySelector("#calcCoupon");
                                 const resultCoupon = document.querySelector("#resultCoupon");
                                 calcCoupon.addEventListener('click', () => {
-                                    fetch(`{{ route('coupon_calc') }}?coupon=${couponInp.value}`)
-                                        .then((response) => response.json())
-                                        .then((data) => {
-                                            if (data.message == "success") {
-                                                resultCoupon.innerHTML = data.discount;
+                                    axios.get(`{{ route('coupon_calc') }}?coupon=${couponInp.value}`)
+                                        .then((response) => {
+                                            if (response.data.message == "success") {
+                                                resultCoupon.innerHTML = response.data.discount;
                                             } else {
-                                                resultCoupon.innerHTML = data.message;
+                                                resultCoupon.innerHTML = response.data.message;
                                             }
                                         });
                                 })
@@ -101,10 +100,9 @@
                                 const calcShipping = document.querySelector("#calcShipping");
                                 const resultShipping = document.querySelector("#resultShipping");
                                 calcShipping.addEventListener('click', () => {
-                                    fetch(`{{ route('shipping_calc') }}?cep=${cepInp.value}`)
-                                        .then((response) => response.json())
-                                        .then((data) => {
-                                            resultShipping.innerHTML = data.html
+                                    axios.get(`{{ route('shipping_calc') }}?cep=${cepInp.value}`)
+                                        .then((response) => {
+                                            resultShipping.innerHTML = response.data.html
                                         });
                                 })
                             })

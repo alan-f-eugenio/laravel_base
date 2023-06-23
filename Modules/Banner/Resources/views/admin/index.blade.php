@@ -21,8 +21,7 @@
             <x-admin.filter-input inpName="title" title="Título" placeholder="Título do banner" />
             <x-admin.filter-select inpName="local_id" title="Local">
                 @foreach ($bannerLocals as $local)
-                    <x-admin.filter-select-option inpName="local_id" :inpValue="$local->id"
-                        :title="$local->title" />
+                    <x-admin.filter-select-option inpName="local_id" :inpValue="$local->id" :title="$local->title" />
                 @endforeach
             </x-admin.filter-select>
         </x-admin.filter>
@@ -74,19 +73,17 @@
                                 {{ $item->updated_at != $item->created_at ? $item->updated_at->format('d/m/Y H:i:s') : 'Nunca' }}
                             </x-admin.table-td>
                             <x-admin.table-td>
-                                <x-admin.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()"
-                                    :falseTitle="$item->status->texto()" />
+                                <x-admin.status-badge :condition="$item->status->ativo()" :trueTitle="$item->status->texto()" :falseTitle="$item->status->texto()" />
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
-                                <x-admin.table-action class="spotlight" :data-title="$local . ' - ' . $item->title"
-                                    :href="asset('storage/' . $item->filename)" title="Visualizar">
+                                <x-admin.table-action class="spotlight" :data-title="$local . ' - ' . $item->title" :href="asset('storage/' . $item->filename)"
+                                    title="Visualizar">
                                     <i class="text-base ti ti-eye"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action :href="route('admin.banners.edit', $item->id)" title="Editar">
                                     <i class="text-base ti ti-edit"></i>
                                 </x-admin.table-action>
-                                <x-admin.table-action :href="route('admin.banners.destroy', $item->id)" title="Excluir"
-                                    :destroy="true">
+                                <x-admin.table-action :href="route('admin.banners.destroy', $item->id)" title="Excluir" :destroy="true">
                                     <i class="text-base ti ti-trash"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
@@ -112,14 +109,7 @@
                         ordem: newOrdem
                     };
                 })
-                fetch("{{ route('admin.banners_order') }}", {
-                    headers: {
-                        "Content-type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    method: "PUT",
-                    body: JSON.stringify(sortJson)
-                });
+                axios.put("{{ route('admin.banners_order') }}", sortJson);
             }
 
             let sortables = document.querySelectorAll(".table-sortable");

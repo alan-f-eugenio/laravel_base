@@ -37,26 +37,23 @@
                 <x-admin.form-subtitle>Dados do Produto</x-admin.form-subtitle>
                 <x-admin.form-select inpName="status" title="Status" required>
                     @foreach (\App\Helpers\DefaultStatus::array() as $statusKey => $statusValue)
-                        <x-admin.form-select-option :inpValue="$statusKey" :title="$statusValue"
-                            :selected="(old('status') ?: $item->status?->value) == $statusKey" />
+                        <x-admin.form-select-option :inpValue="$statusKey" :title="$statusValue" :selected="(old('status') ?: $item->status?->value) == $statusKey" />
                     @endforeach
                 </x-admin.form-select>
                 <x-admin.form-select inpName="product_category_id" title="Categoria Principal" required>
                     @foreach ($categories as $category)
-                        <x-admin.form-select-option :inpValue="$category->id" :title="$category->name"
-                            :selected="(old('product_category_id') ?: $item->product_category?->id) == $category->id" />
+                        <x-admin.form-select-option :inpValue="$category->id" :title="$category->name" :selected="(old('product_category_id') ?: $item->product_category?->id) == $category->id" />
                         @if ($category->allChilds())
-                            <x-product::admin.product-category-recursive-option :categories="$category->allChilds"
-                                :idSelected="$item->category?->id" inpName="product_category_id" />
+                            <x-product::admin.product-category-recursive-option :categories="$category->allChilds" :idSelected="$item->category?->id"
+                                inpName="product_category_id" />
                         @endif
                     @endforeach
                 </x-admin.form-select>
             </x-admin.form-grid>
-            <x-admin.form-select id="product_secondary_category_id"
-                inpName="product_secondary_category_id[]" title="Categorias Secundárias" size="1" multiple>
+            <x-admin.form-select id="product_secondary_category_id" inpName="product_secondary_category_id[]"
+                title="Categorias Secundárias" size="1" multiple>
                 @foreach ($categories as $category)
-                    <x-admin.form-select-option :inpValue="$category->id" :title="$category->name"
-                        :selected="in_array($category->id, $listSecondaryCat)" />
+                    <x-admin.form-select-option :inpValue="$category->id" :title="$category->name" :selected="in_array($category->id, $listSecondaryCat)" />
                     @if ($category->allChilds())
                         <x-product::admin.product-category-recursive-option-tree :categories="$category->allChilds"
                             inpName="product_category_id" :treeStr="$category->name" />
@@ -68,152 +65,131 @@
                     <x-admin.form-input inpName="sku" placeholder="SKU" :inpValue="old('sku') ?: $item->sku" required />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="name" title="Nome">
-                    <x-admin.form-input inpName="name" placeholder="Nome do produto" :inpValue="old('name') ?: $item->name"
-                        required />
+                    <x-admin.form-input inpName="name" placeholder="Nome do produto" :inpValue="old('name') ?: $item->name" required />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="ean" title="EAN">
-                    <x-admin.form-input inpName="ean" placeholder="Código de barras"
-                        :inpValue="old('ean') ?: $item->ean" />
+                    <x-admin.form-input inpName="ean" placeholder="Código de barras" :inpValue="old('ean') ?: $item->ean" />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="brand" title="Marca">
-                    <x-admin.form-input inpName="brand" placeholder="Marca do produto"
-                        :inpValue="old('brand') ?: $item->brand" />
+                    <x-admin.form-input inpName="brand" placeholder="Marca do produto" :inpValue="old('brand') ?: $item->brand" />
                 </x-admin.form-label>
             </x-admin.form-grid>
-            <x-admin.form-select inpName="type" title="Tipo do Produto" required
-                x-on:change="typeOrca = !typeOrca">
+            <x-admin.form-select inpName="type" title="Tipo do Produto" required x-on:change="typeOrca = !typeOrca">
                 @foreach ($productTypes as $typeKey => $typeValue)
-                    <x-admin.form-select-option :inpValue="$typeKey" :title="$typeValue"
-                        :selected="(old('type') ?: $item->type?->value) == $typeKey" />
+                    <x-admin.form-select-option :inpValue="$typeKey" :title="$typeValue" :selected="(old('type') ?: $item->type?->value) == $typeKey" />
                 @endforeach
             </x-admin.form-select>
             <x-admin.form-grid gridCols="sm:grid-cols-3">
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="price_cost"
-                    title="Custo">
-                    <x-admin.form-input inpName="price_cost" placeholder="R$ 0,00" :inpValue="old('price_cost') ?: $item->price_cost"
-                        required ::disabled="typeOrca" :disabled="$typeOrca" class="moneyMask" />
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="price_cost" title="Custo">
+                    <x-admin.form-input inpName="price_cost" placeholder="R$ 0,00" :inpValue="old('price_cost') ?: $item->price_cost" required
+                        ::disabled="typeOrca" :disabled="$typeOrca" class="moneyMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="price"
-                    title="Preço">
-                    <x-admin.form-input inpName="price" placeholder="R$ 0,00" :inpValue="old('price') ?: $item->price"
-                        required ::disabled="typeOrca" :disabled="$typeOrca" class="moneyMask" />
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="price" title="Preço">
+                    <x-admin.form-input inpName="price" placeholder="R$ 0,00" :inpValue="old('price') ?: $item->price" required
+                        ::disabled="typeOrca" :disabled="$typeOrca" class="moneyMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="weight"
-                    title="Peso (kg)">
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="weight" title="Peso (kg)">
                     <x-admin.form-input inpName="weight" placeholder="0,000" :inpValue="old('weight') ?: $item->weight" required
                         ::disabled="typeOrca" :disabled="$typeOrca" class="weightMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="width"
-                    title="Largura (cm)">
-                    <x-admin.form-input inpName="width" placeholder="0" :inpValue="old('width') ?: $item->width" required
-                        ::disabled="typeOrca" :disabled="$typeOrca" class="integerMask" />
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="width" title="Largura (cm)">
+                    <x-admin.form-input inpName="width" placeholder="0" :inpValue="old('width') ?: $item->width" required ::disabled="typeOrca"
+                        :disabled="$typeOrca" class="integerMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="height"
-                    title="Altura (cm)">
-                    <x-admin.form-input inpName="height" placeholder="0" :inpValue="old('height') ?: $item->height" required
-                        ::disabled="typeOrca" :disabled="$typeOrca" class="integerMask" />
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="height" title="Altura (cm)">
+                    <x-admin.form-input inpName="height" placeholder="0" :inpValue="old('height') ?: $item->height" required ::disabled="typeOrca"
+                        :disabled="$typeOrca" class="integerMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="depth"
-                    title="Comprimento (cm)">
-                    <x-admin.form-input inpName="depth" placeholder="0" :inpValue="old('depth') ?: $item->depth" required
-                        ::disabled="typeOrca" :disabled="$typeOrca" class="integerMask" />
+                <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="depth" title="Comprimento (cm)">
+                    <x-admin.form-input inpName="depth" placeholder="0" :inpValue="old('depth') ?: $item->depth" required ::disabled="typeOrca"
+                        :disabled="$typeOrca" class="integerMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="$typeOrca && !$hasChild" x-show="!typeOrca && hasChild == 0"
-                    inpName="stock" title="Estoque">
-                    <x-admin.form-input inpName="stock" placeholder="0" :inpValue="old('stock') ?: $item->stock" required
-                        ::disabled="typeOrca || hasChild > 0" :disabled="$typeOrca" class="integerMask" />
+                <x-admin.form-label :xCloak="$typeOrca && !$hasChild" x-show="!typeOrca && hasChild == 0" inpName="stock"
+                    title="Estoque">
+                    <x-admin.form-input inpName="stock" placeholder="0" :inpValue="old('stock') ?: $item->stock" required ::disabled="typeOrca || hasChild > 0"
+                        :disabled="$typeOrca" class="integerMask" />
                 </x-admin.form-label>
                 <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="deadline"
                     title="Prazo de Entrega Adicional">
-                    <x-admin.form-input inpName="deadline" placeholder="Prazo adicional"
-                        :inpValue="old('deadline') ?: $item->deadline" ::disabled="typeOrca" :disabled="$typeOrca" class="integerMask" />
+                    <x-admin.form-input inpName="deadline" placeholder="Prazo adicional" :inpValue="old('deadline') ?: $item->deadline"
+                        ::disabled="typeOrca" :disabled="$typeOrca" class="integerMask" />
                 </x-admin.form-label>
                 <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="inPromo"
                     title="Marcar Produto em Promoção">
-                    <x-admin.form-check-toggle inpName="inPromo" title="Promoção"
-                        x-on:change="inPromo = !inPromo" alpineDisabledVar="typeOrca" :checked="$inPromo"
-                        :disabled="$typeOrca" />
+                    <x-admin.form-check-toggle inpName="inPromo" title="Promoção" x-on:change="inPromo = !inPromo"
+                        alpineDisabledVar="typeOrca" :checked="$inPromo" :disabled="$typeOrca" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca"
-                    inpName="promo_value" title="Preço Promocional">
-                    <x-admin.form-input inpName="promo_value" placeholder="R$ 0,00" :inpValue="old('promo_value') ?: $item->promo_value"
-                        required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" class="moneyMask" />
+                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca" inpName="promo_value"
+                    title="Preço Promocional">
+                    <x-admin.form-input inpName="promo_value" placeholder="R$ 0,00" :inpValue="old('promo_value') ?: $item->promo_value" required
+                        ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" class="moneyMask" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca"
-                    inpName="promo_date_in" title="Data de Início da Promoção">
-                    <x-admin.form-input inpName="promo_date_in" type="datetime-local"
-                        placeholder="00/00/000" :inpValue="old('promo_date_in') ?: $item->promo_date_in" required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" />
+                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca" inpName="promo_date_in"
+                    title="Data de Início da Promoção">
+                    <x-admin.form-input inpName="promo_date_in" type="datetime-local" placeholder="00/00/000"
+                        :inpValue="old('promo_date_in') ?: $item->promo_date_in" required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" />
                 </x-admin.form-label>
-                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca"
-                    inpName="promo_date_end" title="Data de Fim da Promoção">
-                    <x-admin.form-input inpName="promo_date_end" type="datetime-local"
-                        placeholder="00/00/000" :inpValue="old('promo_date_end') ?: $item->promo_date_end" required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" />
+                <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca" inpName="promo_date_end"
+                    title="Data de Fim da Promoção">
+                    <x-admin.form-input inpName="promo_date_end" type="datetime-local" placeholder="00/00/000"
+                        :inpValue="old('promo_date_end') ?: $item->promo_date_end" required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca" />
                 </x-admin.form-label>
             </x-admin.form-grid>
             <x-admin.form-grid gridCols="sm:grid-cols-2">
                 <x-admin.form-subtitle>Informações do Produto</x-admin.form-subtitle>
                 <x-admin.form-label inpName="page_title" title="Título da Página">
-                    <x-admin.form-input inpName="page_title" placeholder="Page title"
-                        :inpValue="old('page_title') ?: $item->page_title" />
+                    <x-admin.form-input inpName="page_title" placeholder="Page title" :inpValue="old('page_title') ?: $item->page_title" />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="meta_description" title="Descrição da Página">
                     <x-admin.form-input inpName="meta_description" placeholder="Meta description"
                         :inpValue="old('meta_description') ?: $item->meta_description" />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="meta_keywords" title="Palavras Chave">
-                    <x-admin.form-input inpName="meta_keywords" placeholder="Meta keywords"
-                        :inpValue="old('meta_keywords') ?: $item->meta_keywords" />
+                    <x-admin.form-input inpName="meta_keywords" placeholder="Meta keywords" :inpValue="old('meta_keywords') ?: $item->meta_keywords" />
                 </x-admin.form-label>
                 <x-admin.form-label inpName="warranty" title="Informações de Garantia">
-                    <x-admin.form-input inpName="warranty" placeholder="Garantia"
-                        :inpValue="old('warranty') ?: $item->warranty" />
+                    <x-admin.form-input inpName="warranty" placeholder="Garantia" :inpValue="old('warranty') ?: $item->warranty" />
                 </x-admin.form-label>
             </x-admin.form-grid>
-            <x-admin.form-textarea inpName="text" title="Descrição do Produto"
-                placeholder="Descrição" :inpValue="old('text') ?: $item->text" />
-            <x-admin.form-label inpName="filenames"
-                title="Imagens do Produto (arraste para reordenar)">
+            <x-admin.form-textarea inpName="text" title="Descrição do Produto" placeholder="Descrição"
+                :inpValue="old('text') ?: $item->text" />
+            <x-admin.form-label inpName="filenames" title="Imagens do Produto (arraste para reordenar)">
                 <input type="file" class="filepond" name="filenames[]" multiple>
             </x-admin.form-label>
-            <x-admin.form-select id="product_related_id" inpName="product_related_id[]"
-                title="Produtos Relacionados" size="1" multiple>
+            <x-admin.form-select id="product_related_id" inpName="product_related_id[]" title="Produtos Relacionados"
+                size="1" multiple>
                 @foreach ($listRelatedProducts as $related)
-                    <x-admin.form-select-option :inpValue="$related->id" :title="$related->name"
-                        :selected="true" />
+                    <x-admin.form-select-option :inpValue="$related->id" :title="$related->name" :selected="true" />
                 @endforeach
             </x-admin.form-select>
             <x-admin.form-subtitle>Variações</x-admin.form-subtitle>
-            <x-admin.form-select inpName="has_child" title="" required
-                x-on:change="hasChild = $el.value" ::aria-disabled="childCount > 0" ::tabindex="childCount > 0 ? '-1' : '0'" ::class="childCount > 0 ? 'aria-disabled:bg-gray-300 pointer-events-none touch-none' : ''">
+            <x-admin.form-select inpName="has_child" title="" required x-on:change="hasChild = $el.value"
+                ::aria-disabled="childCount > 0" ::tabindex="childCount > 0 ? '-1' : '0'" ::class="childCount > 0 ? 'aria-disabled:bg-gray-300 pointer-events-none touch-none' : ''">
                 @foreach ($productHasChildTypes as $hasChildKey => $hasChildValue)
-                    <x-admin.form-select-option :inpValue="$hasChildKey" :title="$hasChildValue"
-                        :selected="(old('has_child') ?: $item->has_child?->value) == $hasChildKey" />
+                    <x-admin.form-select-option :inpValue="$hasChildKey" :title="$hasChildValue" :selected="(old('has_child') ?: $item->has_child?->value) == $hasChildKey" />
                 @endforeach
             </x-admin.form-select>
             <x-admin.form-grid gridCols="sm:grid-cols-2">
-                <x-admin.form-select id="product_attribute1_id" required :xCloak="!$hasChild"
-                    ::disabled="hasChild == 0" xShow="hasChild > 0" inpName="product_att1_id" title="Atributo"
-                    ::aria-disabled="hasChild == 0 || childCount > 0" ::tabindex="hasChild == 0 || childCount > 0 ? '-1' : '0'" ::class="hasChild == 0 || childCount > 0 ? 'aria-disabled:bg-gray-300 pointer-events-none touch-none' : ''">
+                <x-admin.form-select id="product_attribute1_id" required :xCloak="!$hasChild" ::disabled="hasChild == 0"
+                    xShow="hasChild > 0" inpName="product_att1_id" title="Atributo" ::aria-disabled="hasChild == 0 || childCount > 0"
+                    ::tabindex="hasChild == 0 || childCount > 0 ? '-1' : '0'" ::class="hasChild == 0 || childCount > 0 ? 'aria-disabled:bg-gray-300 pointer-events-none touch-none' : ''">
                     <option disabled selected value="">Selecione</option>
                     @foreach ($attributes as $attribute)
-                        <x-admin.form-select-option :inpValue="$attribute->id" :title="$attribute->name"
-                            :selected="(old('product_att1_id') ?: $item->product_att1_id) == $attribute->id" />
+                        <x-admin.form-select-option :inpValue="$attribute->id" :title="$attribute->name" :selected="(old('product_att1_id') ?: $item->product_att1_id) == $attribute->id" />
                     @endforeach
                 </x-admin.form-select>
-                <x-admin.form-select :xCloak="!$hasChild" xShow="hasChild > 0" ::disabled="hasChild == 0"
-                    :disabled="!$hasChild || $listChilds->count()" id="product_opt1_id" inpName="product_opt1_id[]" title="Opções"
-                    size="1" multiple>
+                <x-admin.form-select :xCloak="!$hasChild" xShow="hasChild > 0" ::disabled="hasChild == 0" :disabled="!$hasChild || $listChilds->count()"
+                    id="product_opt1_id" inpName="product_opt1_id[]" title="Opções" size="1" multiple>
                     <option disabled selected value="">Selecione a(s) opçõe(s)</option>
                 </x-admin.form-select>
-                <x-admin.form-select :xCloak="!$hasChild" xShow="hasChild == 2"
-                    id="product_attribute2_id" ::disabled="hasChild < 2" inpName="product_att2_id" title="Atributo"
+                <x-admin.form-select :xCloak="!$hasChild" xShow="hasChild == 2" id="product_attribute2_id"
+                    ::disabled="hasChild < 2" inpName="product_att2_id" title="Atributo"
                     ::aria-disabled="hasChild < 2 || childCount > 0"
                     ::tabindex="hasChild < 2 || childCount > 0 ? '-1' : '0'"
                     ::class="hasChild < 2 || childCount > 0 ? 'aria-disabled:bg-gray-300 pointer-events-none touch-none' : ''">
                     <option disabled selected value="">Selecione</option>
                     @foreach ($attributes as $attribute)
-                        <x-admin.form-select-option :inpValue="$attribute->id" :title="$attribute->name"
-                            :selected="(old('product_att2_id') ?: $item->product_att2_id) == $attribute->id" />
+                        <x-admin.form-select-option :inpValue="$attribute->id" :title="$attribute->name" :selected="(old('product_att2_id') ?: $item->product_att2_id) == $attribute->id" />
                     @endforeach
                 </x-admin.form-select>
                 <x-admin.form-select :xCloak="!$hasChild" xShow="hasChild == 2" ::disabled="hasChild < 2"
@@ -250,15 +226,15 @@
                             <tr class="bg-white border-b optBox">
                                 <x-admin.table-td class="text-lg font-bold text-center ordemNumber cursor-grab">
                                     <span>{{ $child->ordem }}</span>
-                                    <x-admin.form-input type="hidden" inpName="child_ordem[]"
-                                        required :inpValue="$child->ordem" />
+                                    <x-admin.form-input type="hidden" inpName="child_ordem[]" required
+                                        :inpValue="$child->ordem" />
                                     <x-admin.form-input type="hidden" inpName="child_id[]" required
                                         :inpValue="$child->id" />
                                 </x-admin.table-td>
                                 <x-admin.table-actions-td>
                                     <div class="flex flex-col items-center justify-center">
-                                        <x-admin.table-action href="javascript:;"
-                                            class="z-10 addOptPhoto" :hasPhoto="(bool) $child->filename" :title="(!$child->filename ? 'Adicionar' : 'Alterar') . ' Imagem'">
+                                        <x-admin.table-action href="javascript:;" class="z-10 addOptPhoto"
+                                            :hasPhoto="(bool) $child->filename" :title="(!$child->filename ? 'Adicionar' : 'Alterar') . ' Imagem'">
                                             @if ($child->filename)
                                                 <div class="w-24 h-24">
                                                     <div class="h-full mx-auto">
@@ -280,8 +256,8 @@
                                             title="{{ $child->attribute1->name }}" required>
                                             <option disabled selected value="">Selecione</option>
                                             @foreach ($child->attribute1->options as $opt1)
-                                                <x-admin.form-select-option :inpValue="$opt1->id"
-                                                    :title="$opt1->name" :selected="$child->product_opt1_id == $opt1->id" />
+                                                <x-admin.form-select-option :inpValue="$opt1->id" :title="$opt1->name"
+                                                    :selected="$child->product_opt1_id == $opt1->id" />
                                             @endforeach
                                         </x-admin.form-select>
                                         @if ($child->attribute2)
@@ -289,72 +265,70 @@
                                                 title="{{ $child->attribute2->name }}" required>
                                                 <option disabled selected value="">Selecione</option>
                                                 @foreach ($child->attribute2->options as $opt2)
-                                                    <x-admin.form-select-option :inpValue="$opt2->id"
-                                                        :title="$opt2->name" :selected="$child->product_opt2_id == $opt2->id" />
+                                                    <x-admin.form-select-option :inpValue="$opt2->id" :title="$opt2->name"
+                                                        :selected="$child->product_opt2_id == $opt2->id" />
                                                 @endforeach
                                             </x-admin.form-select>
                                         @endif
                                     </x-admin.form-grid>
                                     <x-admin.form-grid gridCols="sm:grid-cols-2">
-                                        <x-admin.form-label :inpError="old('child_sku') ? 'child_sku.' . $keyChild : null" inpName="child_sku[]"
-                                            title="Código">
-                                            <x-admin.form-input inpName="child_sku[]"
-                                                placeholder="SKU" :inpValue="$child->sku" required />
+                                        <x-admin.form-label :inpError="old('child_sku') ? 'child_sku.' . $keyChild : null" inpName="child_sku[]" title="Código">
+                                            <x-admin.form-input inpName="child_sku[]" placeholder="SKU"
+                                                :inpValue="$child->sku" required />
                                         </x-admin.form-label>
                                         <x-admin.form-label inpName="child_ean[]" title="EAN">
-                                            <x-admin.form-input inpName="child_ean[]"
-                                                placeholder="Código de barras" :inpValue="$child->ean" />
+                                            <x-admin.form-input inpName="child_ean[]" placeholder="Código de barras"
+                                                :inpValue="$child->ean" />
                                         </x-admin.form-label>
                                     </x-admin.form-grid>
                                     <x-admin.form-grid gridCols="sm:grid-cols-3">
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_price_cost[]" title="Custo">
-                                            <x-admin.form-input inpName="child_price_cost[]"
-                                                placeholder="R$ 0,00" :inpValue="$child->price_cost" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="moneyMask " />
+                                            <x-admin.form-input inpName="child_price_cost[]" placeholder="R$ 0,00"
+                                                :inpValue="$child->price_cost" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="moneyMask " />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_price[]" title="Preço">
-                                            <x-admin.form-input inpName="child_price[]"
-                                                placeholder="R$ 0,00" :inpValue="$child->price" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="moneyMask " />
+                                            <x-admin.form-input inpName="child_price[]" placeholder="R$ 0,00"
+                                                :inpValue="$child->price" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="moneyMask " />
                                         </x-admin.form-label>
-                                        <x-admin.form-label :xCloak="!$inPromo || $typeOrca"
-                                            x-show="!inPromo && !typeOrca" inpName="child_promo_value[]"
-                                            title="Preço Promocional">
-                                            <x-admin.form-input inpName="child_promo_value[]"
-                                                placeholder="R$ 0,00" :inpValue="$child->promo_value" required ::disabled="inPromo || typeOrca"
-                                                :disabled="!$inPromo || $typeOrca" class="moneyMask " />
+                                        <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca"
+                                            inpName="child_promo_value[]" title="Preço Promocional">
+                                            <x-admin.form-input inpName="child_promo_value[]" placeholder="R$ 0,00"
+                                                :inpValue="$child->promo_value" required ::disabled="inPromo || typeOrca" :disabled="!$inPromo || $typeOrca"
+                                                class="moneyMask " />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_weight[]" title="Peso (kg)">
-                                            <x-admin.form-input inpName="child_weight[]"
-                                                placeholder="0,000" :inpValue="$child->weight" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="weightMask " />
+                                            <x-admin.form-input inpName="child_weight[]" placeholder="0,000"
+                                                :inpValue="$child->weight" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="weightMask " />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_width[]" title="Largura (cm)">
-                                            <x-admin.form-input inpName="child_width[]"
-                                                placeholder="0" :inpValue="$child->width" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="integerMask" />
+                                            <x-admin.form-input inpName="child_width[]" placeholder="0"
+                                                :inpValue="$child->width" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="integerMask" />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_height[]" title="Altura (cm)">
-                                            <x-admin.form-input inpName="child_height[]"
-                                                placeholder="0" :inpValue="$child->height" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="integerMask" />
+                                            <x-admin.form-input inpName="child_height[]" placeholder="0"
+                                                :inpValue="$child->height" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="integerMask" />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_depth[]" title="Comprimento (cm)">
-                                            <x-admin.form-input inpName="child_depth[]"
-                                                placeholder="0" :inpValue="$child->depth" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="integerMask" />
+                                            <x-admin.form-input inpName="child_depth[]" placeholder="0"
+                                                :inpValue="$child->depth" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="integerMask" />
                                         </x-admin.form-label>
                                         <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                             inpName="child_stock[]" title="Estoque">
-                                            <x-admin.form-input inpName="child_stock[]"
-                                                placeholder="0" :inpValue="$child->stock" required ::disabled="typeOrca"
-                                                :disabled="$typeOrca" class="integerMask" />
+                                            <x-admin.form-input inpName="child_stock[]" placeholder="0"
+                                                :inpValue="$child->stock" required ::disabled="typeOrca" :disabled="$typeOrca"
+                                                class="integerMask" />
                                         </x-admin.form-label>
                                     </x-admin.form-grid>
                                 </x-admin.table-td>
@@ -377,10 +351,8 @@
                         <tr class="hidden bg-white border-b optBoxNew notSortable">
                             <x-admin.table-td class="text-lg font-bold text-center ordemNumber cursor-grab">
                                 <span></span>
-                                <x-admin.form-input type="hidden" inpName="child_ordem[]" disabled
-                                    required />
-                                <x-admin.form-input type="hidden" inpName="child_id[]" disabled
-                                    required />
+                                <x-admin.form-input type="hidden" inpName="child_ordem[]" disabled required />
+                                <x-admin.form-input type="hidden" inpName="child_id[]" disabled required />
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
                                 <div class="flex flex-col items-center justify-center">
@@ -394,81 +366,77 @@
                             </x-admin.table-actions-td>
                             <x-admin.table-td class="px-6 py-4 space-y-5">
                                 <x-admin.form-grid gridCols="sm:grid-cols-2">
-                                    <x-admin.form-select inpName="child_opt1[]"
-                                        title="Opção de Atributo 1" required disabled>
+                                    <x-admin.form-select inpName="child_opt1[]" title="Opção de Atributo 1" required
+                                        disabled>
                                         <option disabled selected value="">Selecione</option>
                                     </x-admin.form-select>
-                                    <x-admin.form-select inpName="child_opt2[]"
-                                        title="Opção de Atributo 2" required disabled>
+                                    <x-admin.form-select inpName="child_opt2[]" title="Opção de Atributo 2" required
+                                        disabled>
                                         <option disabled selected value="">Selecione</option>
                                     </x-admin.form-select>
                                 </x-admin.form-grid>
                                 <x-admin.form-grid gridCols="sm:grid-cols-2">
                                     <x-admin.form-label inpName="child_sku[]" title="Código">
-                                        <x-admin.form-input inpName="child_sku[]" placeholder="SKU"
-                                            required disabled />
+                                        <x-admin.form-input inpName="child_sku[]" placeholder="SKU" required
+                                            disabled />
                                     </x-admin.form-label>
                                     <x-admin.form-label inpName="child_ean[]" title="EAN">
-                                        <x-admin.form-input inpName="child_ean[]"
-                                            placeholder="Código de barras" disabled />
+                                        <x-admin.form-input inpName="child_ean[]" placeholder="Código de barras"
+                                            disabled />
                                     </x-admin.form-label>
                                 </x-admin.form-grid>
                                 <x-admin.form-grid gridCols="sm:grid-cols-3">
                                     <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                         inpName="child_price_cost[]" title="Custo">
-                                        <x-admin.form-input inpName="child_price_cost[]"
-                                            placeholder="R$ 0,00" required disabled class="moneyMask notTypeOrca" />
+                                        <x-admin.form-input inpName="child_price_cost[]" placeholder="R$ 0,00"
+                                            required disabled class="moneyMask notTypeOrca" />
                                     </x-admin.form-label>
-                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
-                                        inpName="child_price[]" title="Preço">
-                                        <x-admin.form-input inpName="child_price[]"
-                                            placeholder="R$ 0,00" required disabled class="moneyMask notTypeOrca" />
+                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="child_price[]"
+                                        title="Preço">
+                                        <x-admin.form-input inpName="child_price[]" placeholder="R$ 0,00" required
+                                            disabled class="moneyMask notTypeOrca" />
                                     </x-admin.form-label>
-                                    <x-admin.form-label :xCloak="!$inPromo || $typeOrca"
-                                        x-show="!inPromo && !typeOrca" inpName="child_promo_value[]" disabled
-                                        title="Preço Promocional">
-                                        <x-admin.form-input inpName="child_promo_value[]"
-                                            placeholder="R$ 0,00" required disabled
-                                            class="moneyMask notTypeOrca inPromo" />
+                                    <x-admin.form-label :xCloak="!$inPromo || $typeOrca" x-show="!inPromo && !typeOrca"
+                                        inpName="child_promo_value[]" disabled title="Preço Promocional">
+                                        <x-admin.form-input inpName="child_promo_value[]" placeholder="R$ 0,00"
+                                            required disabled class="moneyMask notTypeOrca inPromo" />
                                     </x-admin.form-label>
                                     <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                         inpName="child_weight[]" title="Peso (kg)">
-                                        <x-admin.form-input inpName="child_weight[]"
-                                            placeholder="0,000" required disabled class="weightMask notTypeOrca" />
+                                        <x-admin.form-input inpName="child_weight[]" placeholder="0,000" required
+                                            disabled class="weightMask notTypeOrca" />
                                     </x-admin.form-label>
-                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
-                                        inpName="child_width[]" title="Largura (cm)">
-                                        <x-admin.form-input inpName="child_width[]" placeholder="0"
-                                            required disabled class="notTypeOrca integerMask" />
+                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="child_width[]"
+                                        title="Largura (cm)">
+                                        <x-admin.form-input inpName="child_width[]" placeholder="0" required disabled
+                                            class="notTypeOrca integerMask" />
                                     </x-admin.form-label>
                                     <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
                                         inpName="child_height[]" title="Altura (cm)">
-                                        <x-admin.form-input inpName="child_height[]" placeholder="0"
-                                            required disabled class="notTypeOrca integerMask" />
+                                        <x-admin.form-input inpName="child_height[]" placeholder="0" required disabled
+                                            class="notTypeOrca integerMask" />
                                     </x-admin.form-label>
-                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
-                                        inpName="child_depth[]" title="Comprimento (cm)">
-                                        <x-admin.form-input inpName="child_depth[]" placeholder="0"
-                                            required disabled class="notTypeOrca integerMask" />
+                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="child_depth[]"
+                                        title="Comprimento (cm)">
+                                        <x-admin.form-input inpName="child_depth[]" placeholder="0" required disabled
+                                            class="notTypeOrca integerMask" />
                                     </x-admin.form-label>
-                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca"
-                                        inpName="child_stock[]" title="Estoque">
-                                        <x-admin.form-input inpName="child_stock[]" placeholder="0"
-                                            required disabled class="notTypeOrca integerMask" />
+                                    <x-admin.form-label :xCloak="$typeOrca" x-show="!typeOrca" inpName="child_stock[]"
+                                        title="Estoque">
+                                        <x-admin.form-input inpName="child_stock[]" placeholder="0" required disabled
+                                            class="notTypeOrca integerMask" />
                                     </x-admin.form-label>
                                 </x-admin.form-grid>
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
-                                <x-admin.table-action href="javascript:;" class="upOptBtn"
-                                    title="Subir Ordenação">
+                                <x-admin.table-action href="javascript:;" class="upOptBtn" title="Subir Ordenação">
                                     <i class="text-base ti ti-arrow-move-up"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action href="javascript:;" class="downOptBtn"
                                     title="Descer Ordenação">
                                     <i class="text-base ti ti-arrow-move-down"></i>
                                 </x-admin.table-action>
-                                <x-admin.table-action href="javascript:;" class="removeOptBtn"
-                                    title="Remover Opção">
+                                <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
                                     <i class="text-base ti ti-trash"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
@@ -512,11 +480,10 @@
                     product_related.load(str);
                 },
                 load: function(query, callback) {
-                    fetch("{{ route('admin.products.search') }}?name=" + encodeURIComponent(query) +
-                            "&except={{ $item->id }}")
-                        .then(response => response.json())
-                        .then(json => {
-                            callback(json);
+                    axios.get("{{ route('admin.products.search') }}?name=" +
+                            encodeURIComponent(query) + "&except={{ $item->id }}")
+                        .then(response => {
+                            callback(response.data);
                         }).catch(() => {
                             callback();
                         });
@@ -571,13 +538,12 @@
             const product_att1_id = document.querySelector("#product_attribute1_id");
             const getAtt1Opts = (openOpts = true) => {
                 if (product_att1_id.value) {
-                    fetch("{{ route('admin.product_attribute_opts.index') }}?attribute=" + product_att1_id
+                    axios.get("{{ route('admin.product_attribute_opts.index') }}?attribute=" + product_att1_id
                             .value)
-                        .then(response => response.json())
-                        .then(data => {
+                        .then(response => {
                             productOpt1.clear();
                             productOpt1.clearOptions();
-                            productOpt1.addOptions(data);
+                            productOpt1.addOptions(response.data);
                             productOpt1.refreshOptions(openOpts);
                         });
                 }
@@ -602,13 +568,12 @@
             const product_att2_id = document.querySelector("#product_attribute2_id");
             const getAtt2Opts = (openOpts = true) => {
                 if (product_att2_id.value) {
-                    fetch("{{ route('admin.product_attribute_opts.index') }}?attribute=" + product_att2_id
+                    axios.get("{{ route('admin.product_attribute_opts.index') }}?attribute=" + product_att2_id
                             .value)
-                        .then(response => response.json())
-                        .then(data => {
+                        .then(response => {
                             productOpt2.clear();
                             productOpt2.clearOptions();
-                            productOpt2.addOptions(data);
+                            productOpt2.addOptions(response.data);
                             productOpt2.refreshOptions(openOpts);
                         });
                 }
@@ -822,11 +787,11 @@
                     elClone.querySelectorAll("select").forEach((el1) => {
                         el1.disabled = false;
                         if (el1.name == "child_opt1[]") {
-                            fetch("{{ route('admin.product_attribute_opts.index') }}?attribute=" +
+                            axios.get(
+                                    "{{ route('admin.product_attribute_opts.index') }}?attribute=" +
                                     product_att1_id.value)
-                                .then(response => response.json())
-                                .then(data => {
-                                    data.forEach((opt1) => {
+                                .then(response => {
+                                    response.data.forEach((opt1) => {
                                         let optHtml = document.createElement(
                                             "option");
                                         optHtml.value = opt1.id;
@@ -841,11 +806,11 @@
                                 .name;
                         } else if (el1.name == "child_opt2[]") {
                             if (hasChild.value == 2) {
-                                fetch("{{ route('admin.product_attribute_opts.index') }}?attribute=" +
+                                axios.get(
+                                        "{{ route('admin.product_attribute_opts.index') }}?attribute=" +
                                         product_att2_id.value)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        data.forEach((opt2) => {
+                                    .then(response => {
+                                        response.data.forEach((opt2) => {
                                             let optHtml = document
                                                 .createElement(
                                                     "option");

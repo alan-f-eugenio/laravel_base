@@ -58,14 +58,7 @@
                         };
                     }
                 })
-                fetch("{{ route('admin.product_categories_order') }}", {
-                    headers: {
-                        "Content-type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    method: "PUT",
-                    body: JSON.stringify(sortJson)
-                });
+                axios.put("{{ route('admin.product_categories_order') }}", sortJson)
             }
 
             let sortables = document.querySelectorAll(".table-sortable");

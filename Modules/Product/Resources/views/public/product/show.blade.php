@@ -38,10 +38,9 @@
                                 const calcFrete = document.querySelector("#calcFrete");
                                 const tableFrete = document.querySelector("#tableFrete");
                                 calcFrete.addEventListener('click', () => {
-                                    fetch(`{{ route('shipping_calc') }}?cep=${cepInp.value}&product_id={{ $item->id }}`)
-                                        .then((response) => response.json())
-                                        .then((data) => {
-                                            tableFrete.innerHTML = data.html
+                                    axios.get(`{{ route('shipping_calc') }}?cep=${cepInp.value}&product_id={{ $item->id }}`)
+                                        .then((response) => {
+                                            tableFrete.innerHTML = response.data.html
                                         });
                                 })
                             })
