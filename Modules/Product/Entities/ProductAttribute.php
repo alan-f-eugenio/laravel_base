@@ -11,10 +11,6 @@ use Modules\Product\Database\factories\ProductAttributeFactory;
 class ProductAttribute extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $with = [
-        // 'options',
-    ];
-
     protected $fillable = [
         'create_user_id',
         'update_user_id',

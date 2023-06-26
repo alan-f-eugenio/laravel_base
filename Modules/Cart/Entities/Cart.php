@@ -12,16 +12,6 @@ use Modules\Customer\Entities\Customer;
 class Cart extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $with = [
-        // 'cartProducts',
-        // 'cartProducts.product',
-        // 'cartProducts.product.category',
-        // 'cartProducts.product.attribute1',
-        // 'cartProducts.product.option1',
-        // 'cartProducts.product.attribute2',
-        // 'cartProducts.product.option2',
-    ];
-
     protected $fillable = [
         'customer_id',
         'coupon',
@@ -41,14 +31,6 @@ class Cart extends Model {
 
     public function cartProducts() {
         return $this->hasMany(CartProduct::class, 'cart_id', 'id');
-        // ->with([
-        //     'cartProducts.product' => [
-        //         'attribute1',
-        //         'attribute2',
-        //         'option1',
-        //         'option2',
-        //     ],
-        // ])
     }
 
     public function allCartProducts() {

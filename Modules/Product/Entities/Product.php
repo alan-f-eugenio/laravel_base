@@ -16,15 +16,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Product extends Model {
     use HasFactory, SoftDeletes, LogsActivity;
 
-    protected $with = [
-        // 'category',
-        // 'parent'
-        // 'attribute1',
-        // 'option1',
-        // 'attribute2',
-        // 'option2',
-    ];
-
     protected $fillable = [
         'id',
         'id_parent',
@@ -103,13 +94,7 @@ class Product extends Model {
 
     public function childs() {
         return $this->hasMany(Product::class, 'id_parent', 'id')->orderBy('ordem', 'asc')
-            ->with('attribute1', 'option1')
-            ->with('attribute2', function ($query) {
-                $query->whereNotNull('id');
-            })
-            ->with('option2', function ($query) {
-                $query->whereNotNull('id');
-            })
+            ->with('attribute1', 'option1','attribute2', 'option2')
             ->withoutTrashed();
     }
 

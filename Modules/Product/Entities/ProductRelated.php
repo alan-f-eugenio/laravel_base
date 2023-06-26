@@ -10,10 +10,6 @@ class ProductRelated extends Model {
 
     public $timestamps = false;
 
-    protected $with = [
-        // 'product2',
-    ];
-
     protected $fillable = [
         'product_id',
         'product_id2',

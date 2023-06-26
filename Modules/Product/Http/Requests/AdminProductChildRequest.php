@@ -4,6 +4,8 @@ namespace Modules\Product\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Product\Entities\Product;
+use Modules\Product\Entities\ProductAttributeOpt;
 
 class AdminProductChildRequest extends FormRequest {
     /**

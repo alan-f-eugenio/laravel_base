@@ -10,10 +10,6 @@ use Modules\Product\Entities\Product;
 class CartProduct extends Model {
     use HasFactory, SoftDeletes;
 
-    protected $with = [
-        'product',
-    ];
-
     protected $fillable = [
         'cart_id',
         'product_id',
@@ -25,21 +21,6 @@ class CartProduct extends Model {
 
     public function product() {
 
-        return $this->hasOne(Product::class, 'id', 'product_id')
-            ->with('parent', function ($query) {
-                $query->whereNotNull('id');
-            })
-            ->with('attribute1', function ($query) {
-                $query->whereNotNull('id');
-            })
-            ->with('option1', function ($query) {
-                $query->whereNotNull('id');
-            })
-            ->with('attribute2', function ($query) {
-                $query->whereNotNull('id');
-            })
-            ->with('option2', function ($query) {
-                $query->whereNotNull('id');
-            });
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 }

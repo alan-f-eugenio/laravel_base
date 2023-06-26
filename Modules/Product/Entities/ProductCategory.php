@@ -14,12 +14,6 @@ class ProductCategory extends Model {
 
     protected $table = 'product_categories';
 
-    protected $with = [
-        // 'parent',
-        // 'children',
-        // 'allChilds'
-    ];
-
     protected $fillable = [
         'create_user_id',
         'update_user_id',
