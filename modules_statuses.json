@@ -7,7 +7,6 @@
     "Coupon": true,
     "Product": true,
     "Customer": true,
-    "Integration": true,
     "Shipping": true,
     "Frenet": true,
     "Correio": true,

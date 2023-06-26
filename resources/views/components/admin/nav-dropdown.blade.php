@@ -35,9 +35,13 @@
         class="inline-block w-full mb-3 space-y-2 origin-top-left rounded-md {{ !isset($subContent) ? 'shadow-lg' : '' }}"
         {!! !($active ?? false) ? 'style="display: none;"' : '' !!} {!! !isset($sub) && !isset($hasSub) ? '@click="open = false"' : '' !!}>
         <div class="py-1 bg-white rounded-md ring-1 ring-black ring-opacity-5">
-            {{ $content }}
+            @if (isset($content))
+                {{ $content }}
+            @elseif(isset($subContent))
+                {{ $subContent }}
+            @endif
         </div>
-        @if (isset($subContent))
+        @if (isset($content) && isset($subContent))
             @if (isset($subTitle))
                 <h3>{{ $subTitle }}</h3>
             @endif

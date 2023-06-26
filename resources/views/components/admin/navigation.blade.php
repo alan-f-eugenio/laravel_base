@@ -30,171 +30,66 @@
                 Home
             </x-admin.nav-link>
 
-            <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs('admin.contacts.*', 'admin.emails.*')">
-                <x-slot name="trigger">
-                    Comunicação
-                </x-slot>
-                <x-slot name="content">
-                    <x-admin.nav-dropdown-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.*')">
-                        Contatos
-                    </x-admin.nav-dropdown-link>
-                    <x-admin.nav-dropdown-link :href="route('admin.emails.index')" :active="request()->routeIs('admin.emails.*')">
-                        Lista de E-mails
-                    </x-admin.nav-dropdown-link>
-                </x-slot>
-            </x-admin.nav-dropdown>
+            @if ((Module::has('Contact') && Module::isEnabled('Contact')) || (Module::has('Email') && Module::isEnabled('Email')))
+                <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs('admin.contacts.*', 'admin.emails.*')">
+                    <x-slot name="trigger">
+                        Comunicação
+                    </x-slot>
+                    <x-slot name="content">
+                        @includeWhen(Module::has('Contact') && Module::isEnabled('Contact'),
+                            'contact::components.admin.nav-item')
+                        @includeWhen(Module::has('Email') && Module::isEnabled('Email'),
+                            'email::components.admin.nav-item')
+                    </x-slot>
+                </x-admin.nav-dropdown>
+            @endif
 
+            @if ((Module::has('Content') && Module::isEnabled('Content')) || (Module::has('Banner') && Module::isEnabled('Banner')))
+                <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs('admin.contentNavs.*', 'admin.contents.*', 'admin.banners.*')">
+                    <x-slot name="trigger">
+                        Institucional
+                    </x-slot>
+                    <x-slot name="content">
+                        @includeWhen(Module::has('Banner') && Module::isEnabled('Banner'),
+                            'banner::components.admin.nav-item')
+                        @includeWhen(Module::has('Content') && Module::isEnabled('Content'),
+                            'content::components.admin.nav-item')
+                    </x-slot>
+                </x-admin.nav-dropdown>
+            @endif
 
-            <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs('admin.contentNavs.*', 'admin.contents.*', 'admin.banners.*')">
-                <x-slot name="trigger">
-                    Institucional
-                </x-slot>
-                <x-slot name="content">
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.banners.*')">
-                        <x-slot name="trigger">
-                            Banners
-                        </x-slot>
+            @if (
+                (Module::has('Product') && Module::isEnabled('Product')) ||
+                    (Module::has('Coupon') && Module::isEnabled('Coupon')) ||
+                    (Module::has('Cart') && Module::isEnabled('Cart')) ||
+                    (Module::has('Customer') && Module::isEnabled('Customer')))
+                <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs(
+                    'admin.customers.*',
+                    'admin.coupons.*',
+                    'admin.product_categories.*',
+                    'admin.product_attributes.*',
+                    'admin.products.*',
+                    'admin.carts.*',
+                )">
+                    <x-slot name="trigger">
+                        Loja
+                    </x-slot>
+                    @if (Module::has('Product') && Module::isEnabled('Product'))
                         <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.banners.create')" :active="request()->routeIs('admin.banners.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.banners.index')" :active="request()->routeIs('admin.banners.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
+                            @includeWhen(Module::has('Product') && Module::isEnabled('Product'),
+                                'product::components.admin.nav-item')
                         </x-slot>
-                    </x-admin.nav-dropdown>
-                    <x-admin.nav-dropdown :sub="true" :hasSub="true" :active="request()->routeIs('admin.contentNavs.*', 'admin.contents.*')" subTitle="Conteúdos">
-                        <x-slot name="trigger">
-                            Páginas de Conteúdo
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.contentNavs.create')" :active="request()->routeIs('admin.contentNavs.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.contentNavs.index')" :active="request()->routeIs('admin.contentNavs.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                        <x-slot name="subContent">
-                            @foreach (config('contentNavs') as $slug => $nav)
-                                @if ($nav->status->ativo())
-                                    @if ($nav->type->multiple())
-                                        <x-admin.nav-dropdown :sub="true" :active="in_array($nav->id, [
-                                            request()->nav?->id,
-                                            request()->content?->nav->id,
-                                        ])">
-                                            <x-slot name="trigger">
-                                                {{ $nav->title }}
-                                            </x-slot>
-                                            <x-slot name="content">
-                                                <x-admin.nav-dropdown-link :href="route('admin.contents.create', $nav->id)" :active="request()->routeIs('admin.contents.create', $nav->id)">
-                                                    Cadastrar
-                                                </x-admin.nav-dropdown-link>
-                                                <x-admin.nav-dropdown-link :href="route('admin.contents.index', $nav->id)" :active="request()->routeIs('admin.contents.index') &&
-                                                    request()->nav?->id == $nav->id">
-                                                    Listar
-                                                </x-admin.nav-dropdown-link>
-                                            </x-slot>
-                                        </x-admin.nav-dropdown>
-                                    @else
-                                        <x-admin.nav-dropdown-link :sub="true" :href="route('admin.contents.index', $nav->id)"
-                                            :active="in_array($nav->id, [
-                                                request()->nav?->id,
-                                                request()->content?->nav->id,
-                                            ])">
-                                            {{ $nav->title }}
-                                        </x-admin.nav-dropdown-link>
-                                    @endif
-                                @endif
-                            @endforeach
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                </x-slot>
-            </x-admin.nav-dropdown>
-            <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs(
-                'admin.customers.*',
-                'admin.coupons.*',
-                'admin.product_categories.*',
-                'admin.product_attributes.*',
-                'admin.products.*',
-                'admin.carts.*',
-            )">
-                <x-slot name="trigger">
-                    Loja
-                </x-slot>
-                <x-slot name="content">
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.product_categories.*')">
-                        <x-slot name="trigger">
-                            Categorias
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.product_categories.create')" :active="request()->routeIs('admin.product_categories.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.product_categories.index')" :active="request()->routeIs('admin.product_categories.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.product_attributes.*')">
-                        <x-slot name="trigger">
-                            Atributos
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.product_attributes.create')" :active="request()->routeIs('admin.product_attributes.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.product_attributes.index')" :active="request()->routeIs('admin.product_attributes.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.products.*')">
-                        <x-slot name="trigger">
-                            Produtos
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                </x-slot>
-                <x-slot name="subContent" subTitle="">
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.coupons.*')">
-                        <x-slot name="trigger">
-                            Cupons
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.coupons.create')" :active="request()->routeIs('admin.coupons.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.coupons.index')" :active="request()->routeIs('admin.coupons.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                    <x-admin.nav-dropdown :sub="true" :active="request()->routeIs('admin.customers.*')">
-                        <x-slot name="trigger">
-                            Clientes
-                        </x-slot>
-                        <x-slot name="content">
-                            <x-admin.nav-dropdown-link :href="route('admin.customers.create')" :active="request()->routeIs('admin.customers.create')">
-                                Cadastrar
-                            </x-admin.nav-dropdown-link>
-                            <x-admin.nav-dropdown-link :href="route('admin.customers.index')" :active="request()->routeIs('admin.customers.index')">
-                                Listar
-                            </x-admin.nav-dropdown-link>
-                        </x-slot>
-                    </x-admin.nav-dropdown>
-                    <x-admin.nav-dropdown-link :href="route('admin.carts.index')" :active="request()->routeIs('admin.carts.*')">
-                        Carrinhos Abandonados
-                    </x-admin.nav-dropdown-link>
-                </x-slot>
-            </x-admin.nav-dropdown>
+                    @endif
+                    <x-slot name="subContent" subTitle="">
+                        @includeWhen(Module::has('Coupon') && Module::isEnabled('Coupon'),
+                            'coupon::components.admin.nav-item')
+                        @includeWhen(Module::has('Customer') && Module::isEnabled('Customer'),
+                            'customer::components.admin.nav-item')
+                        @includeWhen(Module::has('Cart') && Module::isEnabled('Cart'),
+                            'cart::components.admin.nav-item')
+                    </x-slot>
+                </x-admin.nav-dropdown>
+            @endif
         </div>
         <div class="py-3 border-t border-gray-200">
             <x-admin.nav-dropdown :hasSub="true" :active="request()->routeIs('admin.users.*', 'admin.defines.*', 'admin.integrations.*')">
@@ -227,15 +122,13 @@
         <div class="py-3 border-t border-gray-200">
             <div class="space-y-1">
                 <x-admin.nav-link :href="route('admin.profile.edit')" :active="request()->routeIs('admin.profile.*')">
-                    {{ __('Profile') }}
+                    Perfil
                 </x-admin.nav-link>
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
-
                     <x-admin.nav-link :href="route('admin.logout')"
-                        onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        onclick="event.preventDefault();this.closest('form').submit();">
+                        Sair
                     </x-admin.nav-link>
                 </form>
             </div>
