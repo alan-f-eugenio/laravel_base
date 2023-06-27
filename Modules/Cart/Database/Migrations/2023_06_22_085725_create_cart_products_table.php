@@ -11,6 +11,7 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
+        Schema::dropIfExists('cart_products');
         Schema::create('cart_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id')->constrained('carts')->cascadeOnDelete();
@@ -27,6 +28,8 @@ return new class extends Migration {
      * @return void
      */
     public function down() {
+        Schema::disableForeignKeyConstraints('carts');
+        Schema::disableForeignKeyConstraints('products');
         Schema::dropIfExists('cart_products');
     }
 };

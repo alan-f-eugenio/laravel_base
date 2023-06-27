@@ -2,9 +2,9 @@
 
 namespace Modules\Product\Database\Seeders;
 
-use DragonCode\Support\Facades\Filesystem\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Modules\Product\Entities\Product;
 
 class ProductDatabaseSeeder extends Seeder {

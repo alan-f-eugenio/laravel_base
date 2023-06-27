@@ -20,8 +20,8 @@ return new class extends Migration {
             $table->unsignedTinyInteger('status')->default(1);
             $table->unsignedTinyInteger('person')->default(1);
             $table->string('fullname');
-            $table->string('cpf');
-            $table->date('date_birth');
+            $table->string('cpf')->nullable();
+            $table->date('date_birth')->nullable();
             $table->string('rg')->nullable();
             $table->string('cnpj')->nullable();
             $table->string('state_registration')->nullable();
