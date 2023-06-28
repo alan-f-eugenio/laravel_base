@@ -1,9 +1,4 @@
 <x-admin-layout>
-    @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/froala_editor.pkgd.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/froala_pt_br.min.js') }}"></script>
-        <link href="{{ Vite::asset('resources/css/froala_editor.pkgd.min.css') }}" rel="stylesheet">
-    @endpush
     <x-slot name="header">
         <x-admin.page-title>
             Páginas de Conteúdo >

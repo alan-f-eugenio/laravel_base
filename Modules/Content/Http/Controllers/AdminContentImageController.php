@@ -19,12 +19,12 @@ class AdminContentImageController extends Controller {
 
     public function store(Request $request) {
         $request->validate([
-            'file' => 'required|image|max:5120',
+            'upload' => 'required|image|max:5120',
         ]);
 
-        $filename = request()->file('file')->store('contents', 'public');
+        $filename = request()->file('upload')->store('contents', 'public');
 
-        return stripslashes(json_encode(['link' => asset('storage/' . $filename)]));
+        return stripslashes(json_encode(['url' => asset('storage/' . $filename)]));
     }
 
     public function destroy(Request $request) {
