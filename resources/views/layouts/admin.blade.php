@@ -15,8 +15,8 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"> --}}
 
     <!-- Scripts -->
-    @stack('stylesAndScript')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('stylesAndScript')
 </head>
 
 <body x-data="{ openSideMenu: false }" :class="{ 'overflow-hidden': openSideMenu }" class="font-sans antialiased">
