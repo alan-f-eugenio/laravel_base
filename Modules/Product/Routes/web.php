@@ -7,10 +7,8 @@ use Modules\Product\Http\Controllers\AdminProductCategoryController;
 use Modules\Product\Http\Controllers\AdminProductController;
 use Modules\Product\Http\Controllers\ProductController;
 
-Route::prefix('produtos')->group(function () {
-    Route::get('{product_category:slug?}', [ProductController::class, 'index'])->name('products.index');
-    Route::get('{product_category:slug}/{product:slug}', [ProductController::class, 'show'])->name('products.show');
-});
+Route::get('produtos/{product_category:slug?}', [ProductController::class, 'index'])->name('products.index');
+Route::get('produto/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::prefix('admin')->middleware('auth:admin', 'auth.session')->group(function () {
     Route::get('product_categories', [AdminProductCategoryController::class, 'index'])->name('admin.product_categories.index')->middleware('stripEmptyParams');

@@ -9,7 +9,7 @@
                 <div class="grid items-center col-span-8 gap-6 p-6 bg-white border shadow-sm sm:rounded-lg">
                     @foreach ($cart->cartProducts as $cartProduct)
                         @php
-                            $link = route('products.show', $cartProduct->product->id_parent ? [$cartProduct->product->parent->category->slug, $cartProduct->product->parent->slug] : [$cartProduct->product->category->slug, $cartProduct->product->slug]);
+                            $link = route('products.show', $cartProduct->product->id_parent ? [$cartProduct->product->parent->slug] : [$cartProduct->product->slug]);
                         @endphp
                         <div class="grid items-center grid-cols-12 gap-6">
                             <div class="col-span-5 ">

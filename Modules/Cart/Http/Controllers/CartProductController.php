@@ -12,8 +12,7 @@ class CartProductController extends Controller {
         $cart = CartController::storeOrUpdate();
 
         return view('cart::public.index', ['cart' => $cart->load(
-            'cartProducts.product.category',
-            'cartProducts.product.parent.category',
+            'cartProducts.product.parent',
             'cartProducts.product.attribute1',
             'cartProducts.product.option1',
             'cartProducts.product.attribute2',
