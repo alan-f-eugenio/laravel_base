@@ -1,6 +1,9 @@
 <x-admin-layout>
     @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/ckeditor.js') }}"></script>
+        <script type="module">
+            import ClassicEditor from "{{ Vite::asset('resources/js/ckeditor.js') }}";
+            window.ClassicEditor = ClassicEditor;
+        </script>
     @endpush
     <x-slot name="header">
         <x-admin.page-title>
@@ -51,17 +54,19 @@
             <x-admin.form-textarea inpName="abstract" title="Resumo" placeholder="Resumo do conteúdo"
                 :inpValue="old('abstract') ?: $item->abstract" />
             <script>
-                document.querySelectorAll('textarea.textEditor').forEach((el1) => {
-                    ClassicEditor
-                        .create(el1, {
-                            simpleUpload: {
-                                uploadUrl: '{{ route('admin.content_images.store') }}',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                    'accept': 'application/json'
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.querySelectorAll('textarea.textEditor').forEach((el1) => {
+                        ClassicEditor
+                            .create(el1, {
+                                simpleUpload: {
+                                    uploadUrl: '{{ route('admin.content_images.store') }}',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'accept': 'application/json'
+                                    }
                                 }
-                            }
-                        });
+                            });
+                    })
                 })
             </script>
         </x-admin.form>

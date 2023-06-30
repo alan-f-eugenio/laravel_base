@@ -1,7 +1,4 @@
 <x-public-layout>
-    @push('scripts')
-        <script src="{{ Vite::asset('resources/js/cep-promise-browser.min.js') }}"></script>
-    @endpush
     <div class="p-6 space-y-6 bg-white border shadow-sm sm:rounded-lg">
         <x-admin.list-section>
             <x-admin.form :action="$item->id ? route('customer_address.update', $item->id) : route('customer_address.store')" :editing="(bool) $item->id">

@@ -1,6 +1,9 @@
 <x-admin-layout>
     @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
+        <script type="module">
+            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
+            window.Sortable = Sortable;
+        </script>
     @endpush
     <x-slot name="header">
         <x-admin.page-title>

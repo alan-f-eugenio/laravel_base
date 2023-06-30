@@ -4,13 +4,21 @@
         <link href="{{ Vite::asset('resources/css/filepond.min.css') }}" rel="stylesheet">
         <link href="{{ Vite::asset('resources/css/filepond-preview.min.css') }}" rel="stylesheet">
 
-        <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/tom-select.complete.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/filepond.min.js') }}"></script>
+        <script type="module">
+            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
+            window.Sortable = Sortable;
+            import TomSelect from "{{ Vite::asset('resources/js/tom-select.complete.min.js') }}";
+            window.TomSelect = TomSelect;
+            import FilePond from "{{ Vite::asset('resources/js/filepond.min.js') }}";
+            window.FilePond = FilePond;
+            import FilePondPluginImagePreview from "{{ Vite::asset('resources/js/filepond-preview.min.js') }}";
+            window.FilePondPluginImagePreview = FilePondPluginImagePreview;
+            import FilePondPluginFileValidateType from "{{ Vite::asset('resources/js/filepond-validate-type.min.js') }}";
+            window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
+            import FilePondPluginFileValidateSize from "{{ Vite::asset('resources/js/filepond-validate-size.min.js') }}";
+            window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
+        </script>
         <script src="{{ Vite::asset('resources/js/filepond-ptBR.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/filepond-preview.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/filepond-validate-size.min.js') }}"></script>
-        <script src="{{ Vite::asset('resources/js/filepond-validate-type.min.js') }}"></script>
     @endpush
     <x-slot name="header">
         <x-admin.page-title>
@@ -884,7 +892,7 @@
                 let firstItem = e.detail.items[0];
                 let elementLegends = document.querySelectorAll(".filepond--file-info-main")
                 elementLegends.forEach((el1) => {
-                    if (el1.textContent == firstItem.filename) {
+                    if (firstItem && el1.textContent == firstItem.filename) {
                         el1.closest(".filepond--item").classList.add("mainPond");
                     }
                 })

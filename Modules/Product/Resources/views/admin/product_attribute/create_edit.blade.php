@@ -1,6 +1,9 @@
 <x-admin-layout>
     @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
+        <script type="module">
+            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
+            window.Sortable = Sortable;
+        </script>
     @endpush
     <x-slot name="header">
         <x-admin.page-title>
@@ -20,13 +23,11 @@
             <x-admin.form-grid gridCols="sm:grid-cols-2">
                 <x-admin.form-select inpName="status" title="Status" required>
                     @foreach (\App\Helpers\DefaultStatus::array() as $statusKey => $statusValue)
-                        <x-admin.form-select-option :inpValue="$statusKey" :title="$statusValue"
-                            :selected="(old('status') ?: $item->status?->value) == $statusKey" />
+                        <x-admin.form-select-option :inpValue="$statusKey" :title="$statusValue" :selected="(old('status') ?: $item->status?->value) == $statusKey" />
                     @endforeach
                 </x-admin.form-select>
                 <x-admin.form-label inpName="name" title="Nome">
-                    <x-admin.form-input inpName="name" placeholder="Nome do atributo" :inpValue="old('name') ?: $item->name"
-                        required />
+                    <x-admin.form-input inpName="name" placeholder="Nome do atributo" :inpValue="old('name') ?: $item->name" required />
                 </x-admin.form-label>
             </x-admin.form-grid>
             <x-admin.table :collection="$item->options" :sortable="true">
@@ -57,18 +58,17 @@
                                 <span class="text-xl">{{ $option->ordem }}</span>
                                 <x-admin.form-input type="hidden" inpName="option_ordem[]" required
                                     :inpValue="$option->ordem" />
-                                <x-admin.form-input type="hidden" inpName="option_id[]" required
-                                    :inpValue="$option->id" />
+                                <x-admin.form-input type="hidden" inpName="option_id[]" required :inpValue="$option->id" />
                             </x-admin.table-td>
                             <x-admin.table-td>
-                                <x-admin.form-input inpName="option_name[]" required
-                                    placeholder="Nome da opção" :inpValue="$option->name" />
+                                <x-admin.form-input inpName="option_name[]" required placeholder="Nome da opção"
+                                    :inpValue="$option->name" />
                             </x-admin.table-td>
                             @if ($item->has_files)
                                 <x-admin.table-actions-td>
                                     <div class="flex flex-col items-center justify-center">
-                                        <x-admin.table-action href="javascript:;"
-                                            class="z-10 addOptPhoto" :hasPhoto="(bool) $option->filename" :title="(!$option->filename ? 'Adicionar' : 'Alterar') . ' Imagem'">
+                                        <x-admin.table-action href="javascript:;" class="z-10 addOptPhoto"
+                                            :hasPhoto="(bool) $option->filename" :title="(!$option->filename ? 'Adicionar' : 'Alterar') . ' Imagem'">
                                             @if ($option->filename)
                                                 <div class="w-10 h-10">
                                                     <div class="h-full mx-auto">
@@ -87,12 +87,11 @@
                             @endif
                             <x-admin.table-td>
                                 {{ $option->created_at ? $option->created_at->format('d/m/Y H:i:s') : 'Salve para confirmar' }}
-                                <x-admin.form-input type="hidden" inpName="option_created_at[]"
-                                    required :inpValue="$option->created_at" />
+                                <x-admin.form-input type="hidden" inpName="option_created_at[]" required
+                                    :inpValue="$option->created_at" />
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
-                                <x-admin.table-action href="javascript:;" class="removeOptBtn"
-                                    title="Remover Opção">
+                                <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
                                     <i class="text-base ti ti-trash"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
@@ -102,14 +101,11 @@
                         <x-admin.table-td class="ordemNumber cursor-grab">
                             <i class="mr-3 text-base ti ti-arrows-up-down"></i>
                             <span class="text-xl"></span>
-                            <x-admin.form-input type="hidden" inpName="option_ordem[]" disabled
-                                required />
-                            <x-admin.form-input type="hidden" inpName="option_id[]" disabled
-                                required />
+                            <x-admin.form-input type="hidden" inpName="option_ordem[]" disabled required />
+                            <x-admin.form-input type="hidden" inpName="option_id[]" disabled required />
                         </x-admin.table-td>
                         <x-admin.table-td>
-                            <x-admin.form-input inpName="option_name[]" disabled required
-                                placeholder="Nome da opção" />
+                            <x-admin.form-input inpName="option_name[]" disabled required placeholder="Nome da opção" />
                         </x-admin.table-td>
                         @if ($item->has_files)
                             <x-admin.table-actions-td>
@@ -125,12 +121,10 @@
                         @endif
                         <x-admin.table-td>
                             Salve para confirmar
-                            <x-admin.form-input type="hidden" inpName="option_created_at[]" required
-                                disabled />
+                            <x-admin.form-input type="hidden" inpName="option_created_at[]" required disabled />
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
-                            <x-admin.table-action href="javascript:;" class="removeOptBtn"
-                                title="Remover Opção">
+                            <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
                                 <i class="text-base ti ti-trash"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
@@ -141,8 +135,7 @@
                         <x-admin.table-td colspan="{{ $item->has_files ? 4 : 3 }}">
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
-                            <x-admin.table-action href="javascript:;" id="addOptBtn"
-                                title="Adicionar Opção">
+                            <x-admin.table-action href="javascript:;" id="addOptBtn" title="Adicionar Opção">
                                 <i class="text-base ti ti-plus max-h-"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>

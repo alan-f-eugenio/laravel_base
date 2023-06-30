@@ -1,6 +1,9 @@
 <x-admin-layout>
     @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/sortable.min.js') }}"></script>
+        <script type="module">
+            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
+            window.Sortable = Sortable;
+        </script>
         <script src="{{ Vite::asset('resources/js/spotlight.bundle.js') }}"></script>
     @endpush
     <x-slot name="header">
@@ -113,7 +116,7 @@
             }
 
             let sortables = document.querySelectorAll(".table-sortable");
-            sortList = [];
+            let sortList = [];
             sortables.forEach((el1, i1) => {
                 changeBannersOrdem(el1);
 

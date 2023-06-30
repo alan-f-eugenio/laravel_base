@@ -139,7 +139,4 @@
             })
         })
     </script>
-    @push('scripts')
-        <script src="{{ Vite::asset('resources/js/cep-promise-browser.min.js') }}"></script>
-    @endpush
 </x-public-layout>

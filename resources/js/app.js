@@ -74,6 +74,8 @@ if (document.querySelectorAll(".percentMask").length) {
     Inputmask(percentOptions).mask(document.querySelectorAll(".percentMask"));
 }
 
+import cep from 'cep-promise'
+
 let oldCepValueApp = null;
 
 const fetchAddressByCep = (

@@ -1,7 +1,4 @@
 <x-admin-layout>
-    @push('stylesAndScript')
-        <script src="{{ Vite::asset('resources/js/cep-promise-browser.min.js') }}"></script>
-    @endpush
     <x-slot name="header">
         <x-admin.page-title>
             Clientes >
