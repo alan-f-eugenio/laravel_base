@@ -1,0 +1,40 @@
+@import url("./common.css");
+
+.filepond--item {
+    width: calc(33.33% - 0.5em);
+}
+
+@media (max-width: 991px) {
+    .filepond--item {
+        width: calc(50% - 0.5em);
+    }
+}
+
+@media (max-width: 767px) {
+    .filepond--item {
+        width: calc(100% - 0.5em);
+    }
+}
+
+.filepond--item.mainPond {
+    position: relative;
+    outline: 4px solid #1a56db;
+    border-radius: 0.5rem;
+}
+
+.filepond--item.mainPond::before {
+    content: "Principal";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 3;
+}
+
+.filepond--file-info {
+    display: none;
+}

@@ -12,9 +12,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- Scripts -->
+    <!-- Scripts And Styles -->
+    @vite([ 'resources/js/public.js', 'resources/css/public.css',])
     @stack('styles')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">

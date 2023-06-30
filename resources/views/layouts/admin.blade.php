@@ -14,8 +14,8 @@
     {{-- <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"> --}}
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Scripts And Styles -->
+    @vite(['resources/css/admin.css', 'resources/js/admin.js'])
     @stack('stylesAndScript')
 </head>
 

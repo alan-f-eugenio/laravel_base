@@ -1,17 +1,12 @@
 import "./bootstrap";
-
 import.meta.glob(["../img/**"]);
-
-import Alpine from "alpinejs";
-
-window.Alpine = Alpine;
-
-Alpine.start();
-
 import "flowbite";
 
-import Inputmask from "inputmask";
+import Alpine from "alpinejs";
+window.Alpine = Alpine;
+Alpine.start();
 
+import Inputmask from "inputmask";
 const integerOptions = {
     alias: "numeric",
     digits: "9,0",
@@ -57,7 +52,6 @@ const percentOptions = {
     removeMaskOnSubmit: true,
 };
 window.percentOptions = percentOptions;
-
 if (document.querySelectorAll(".integerMask").length) {
     Inputmask(integerOptions).mask(document.querySelectorAll(".integerMask"));
 }
@@ -74,10 +68,8 @@ if (document.querySelectorAll(".percentMask").length) {
     Inputmask(percentOptions).mask(document.querySelectorAll(".percentMask"));
 }
 
-import cep from 'cep-promise'
-
+import cep from "cep-promise";
 let oldCepValueApp = null;
-
 const fetchAddressByCep = (
     cepInp,
     streetInp,

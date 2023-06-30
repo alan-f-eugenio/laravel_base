@@ -1,10 +1,4 @@
 <x-admin-layout>
-    @push('stylesAndScript')
-        <script type="module">
-            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
-            window.Sortable = Sortable;
-        </script>
-    @endpush
     <x-slot name="header">
         <x-admin.page-title>
             Categorias

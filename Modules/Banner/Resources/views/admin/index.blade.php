@@ -1,11 +1,4 @@
 <x-admin-layout>
-    @push('stylesAndScript')
-        <script type="module">
-            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
-            window.Sortable = Sortable;
-        </script>
-        <script src="{{ Vite::asset('resources/js/spotlight.bundle.js') }}"></script>
-    @endpush
     <x-slot name="header">
         <x-admin.page-title>
             Banners
@@ -98,7 +91,7 @@
             </x-admin.table>
         @endforeach
     </x-admin.list-section>
-    <script>
+    <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
 
             const changeBannersOrdem = (element) => {

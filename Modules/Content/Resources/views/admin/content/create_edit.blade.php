@@ -1,9 +1,7 @@
 <x-admin-layout>
     @push('stylesAndScript')
-        <script type="module">
-            import ClassicEditor from "{{ Vite::asset('resources/js/ckeditor.js') }}";
-            window.ClassicEditor = ClassicEditor;
-        </script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/translations/pt-br.js"></script>
     @endpush
     <x-slot name="header">
         <x-admin.page-title>
@@ -54,19 +52,18 @@
             <x-admin.form-textarea inpName="abstract" title="Resumo" placeholder="Resumo do conteúdo"
                 :inpValue="old('abstract') ?: $item->abstract" />
             <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    document.querySelectorAll('textarea.textEditor').forEach((el1) => {
-                        ClassicEditor
-                            .create(el1, {
-                                simpleUpload: {
-                                    uploadUrl: '{{ route('admin.content_images.store') }}',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'accept': 'application/json'
-                                    }
+                document.querySelectorAll('textarea.textEditor').forEach((el1) => {
+                    ClassicEditor
+                        .create(el1, {
+                            simpleUpload: {
+                                uploadUrl: '{{ route('admin.content_images.store') }}',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'accept': 'application/json'
                                 }
-                            });
-                    })
+                            },
+                            language: 'pt-br'
+                        });
                 })
             </script>
         </x-admin.form>

@@ -1,25 +1,4 @@
 <x-admin-layout>
-    @push('stylesAndScript')
-        <link href="{{ Vite::asset('resources/css/tom-select.min.css') }}" rel="stylesheet">
-        <link href="{{ Vite::asset('resources/css/filepond.min.css') }}" rel="stylesheet">
-        <link href="{{ Vite::asset('resources/css/filepond-preview.min.css') }}" rel="stylesheet">
-
-        <script type="module">
-            import Sortable from "{{ Vite::asset('resources/js/sortable.min.js') }}";
-            window.Sortable = Sortable;
-            import TomSelect from "{{ Vite::asset('resources/js/tom-select.complete.min.js') }}";
-            window.TomSelect = TomSelect;
-            import FilePond from "{{ Vite::asset('resources/js/filepond.min.js') }}";
-            window.FilePond = FilePond;
-            import FilePondPluginImagePreview from "{{ Vite::asset('resources/js/filepond-preview.min.js') }}";
-            window.FilePondPluginImagePreview = FilePondPluginImagePreview;
-            import FilePondPluginFileValidateType from "{{ Vite::asset('resources/js/filepond-validate-type.min.js') }}";
-            window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
-            import FilePondPluginFileValidateSize from "{{ Vite::asset('resources/js/filepond-validate-size.min.js') }}";
-            window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
-        </script>
-        <script src="{{ Vite::asset('resources/js/filepond-ptBR.min.js') }}"></script>
-    @endpush
     <x-slot name="header">
         <x-admin.page-title>
             Produtos >
@@ -857,8 +836,6 @@
                 productOpt2.clear();
             })
 
-            FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType,
-                FilePondPluginFileValidateSize);
             FilePond.setOptions({
                 allowReorder: true,
                 allowMultiple: true,
@@ -871,8 +848,7 @@
                     'image/jpeg': '.jpg',
                 },
                 styleItemPanelAspectRatio: "0.5",
-                maxFileSize: '5MB',
-                ...filepond_ptBR
+                maxFileSize: '5MB'
             });
             const pond = FilePond.create(document.querySelector('.filepond'));
 

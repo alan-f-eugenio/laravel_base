@@ -10,8 +10,8 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Scripts And Styles -->
+    @vite(['resources/css/common.css', 'resources/js/common.js'])
 </head>
 
 <body class="font-sans antialiased text-gray-900">
