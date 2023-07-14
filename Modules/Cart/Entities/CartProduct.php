@@ -10,6 +10,10 @@ use Modules\Product\Entities\Product;
 class CartProduct extends Model {
     use HasFactory, SoftDeletes;
 
+    protected $with = [
+        'product',
+    ];
+
     protected $fillable = [
         'cart_id',
         'product_id',

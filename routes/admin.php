@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DefineController as AdminDefineController;
 use App\Http\Controllers\Admin\IntegrationController as AdminIntegrationController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -61,5 +62,31 @@ Route::prefix('admin')->group(function () {
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('admin.logout');
+    });
+
+    Route::get('/optimize', function () {
+        dd(Artisan::call('optimize'));
+    });
+    Route::get('/optimize-clear', function () {
+        dd(Artisan::call('optimize:clear'));
+    });
+    Route::get('/route-cache', function () {
+        dd(Artisan::call('route:cache'));
+        // Artisan::call('route:clear');
+    });
+    Route::get('/route-clear', function () {
+        dd(Artisan::call('route:clear'));
+    });
+    Route::get('/view-cache', function () {
+        dd(Artisan::call('view:cache'));
+    });
+    Route::get('/view-clear', function () {
+        dd(Artisan::call('view:clear'));
+    });
+    Route::get('/config-cache', function () {
+        dd(Artisan::call('config:cache'));
+    });
+    Route::get('/config-clear', function () {
+        dd(Artisan::call('config:clear'));
     });
 });
