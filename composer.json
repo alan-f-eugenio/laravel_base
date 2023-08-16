@@ -12,8 +12,8 @@
         "laravel/tinker": "^2.8",
         "laravellegends/pt-br-validator": "^10.0",
         "nwidart/laravel-modules": "^10.0",
-        "pagseguro/pagseguro-php-sdk": "^6.0",
-        "spatie/laravel-activitylog": "^4.7"
+        "spatie/laravel-activitylog": "^4.7",
+        "michael/laravelpagseguro": "dev-master"
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.7",

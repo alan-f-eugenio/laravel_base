@@ -11,10 +11,10 @@ class CartController extends Controller {
         $oldCart = $oldSession ? Cart::firstWhere('session_id', $oldSession) : null;
 
         $newCart = Cart::updateOrCreate(
-            auth()->id() ? ['customer_id' => auth()->id()] : ['session_id' => session()->getId()],
+            auth('web')->id() ? ['customer_id' => auth('web')->id()] : ['session_id' => session()->getId()],
             [
                 'session_id' => session()->getId(),
-                'customer_id' => auth()->id(),
+                'customer_id' => auth('web')->id(),
                 'updated_at' => now(),
                 ...$attributes,
             ]

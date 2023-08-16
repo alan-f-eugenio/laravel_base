@@ -6,12 +6,14 @@ use App\Helpers\DefaultStatus;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Vite;
 use Modules\Cart\Http\Controllers\CartController;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Order\Entities\Order;
 use Modules\Order\Helpers\OrderStatus;
 use Modules\Pagseguro\Helpers\PagSeguroStatus;
+use Modules\Pagseguro\Http\Controllers\PagseguroController;
 use Modules\Shipping\Http\Controllers\ShippingController;
 use Nwidart\Modules\Facades\Module;
 
@@ -68,7 +70,7 @@ class PaymentController extends Controller {
         $shippingMethod = null;
         $shippingCalcData = null;
         foreach (config('integrations.frete') as $keySM => $dataSM) {
-            if ($dataSM['status'] == DefaultStatus::STATUS_ATIVO && $keySM == $shippingData[0]) {
+            if ($keySM == $shippingData[0] && $dataSM['status'] == DefaultStatus::STATUS_ATIVO) {
                 $shippingMethod = $shippingData[0];
                 $shippingCalcData = ShippingController::getShippingValue($cep, $listShippProducts, $totalProducts, $shippingMethod, $shippingData[1]);
                 break;
@@ -114,126 +116,63 @@ class PaymentController extends Controller {
         // dd($order);
 
         if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') && $paymentMethod == 'pagseguro') {
-            \PagSeguro\Library::initialize();
-            \PagSeguro\Library::cmsVersion()->setName('Nome')->setRelease('1.0.0');
-            \PagSeguro\Library::moduleVersion()->setName('Nome')->setRelease('1.0.0');
-            \PagSeguro\Configuration\Configure::setEnvironment('sandbox');
-            \PagSeguro\Configuration\Configure::setLog(true, storage_path('logs/pagseguro.log'));
-
-            $payment = new \PagSeguro\Domains\Requests\Payment;
-
-            $payment->setCurrency('BRL');
-            $payment->setReference($order->id);
-
-            $payment->setSender()->setName($customer->fullname);
-            $payment->setSender()->setEmail($customer->email);
-            $payment->setSender()->setPhone()->withParameters(
-                substr(preg_replace('/[^0-9]/', '', $customer->phone), 0, 2),
-                substr(preg_replace('/[^0-9]/', '', $customer->phone), 2)
-            );
-            $payment->setSender()->setDocument()->withParameters(
-                'CPF',
-                $customer->cpf
-            );
-            $payment->setShipping()->setAddress()->withParameters(
-                $address->street,
-                $address->number,
-                $address->neighborhood,
-                $address->cep,
-                $address->city,
-                $address->state,
-                'BRA',
-                $address->complement
-            );
-            foreach ($cart->cartProducts as $cartProduct) {
-                $product = $cartProduct->product;
-                $payment->addItems()->withParameters(
-                    $product->sku,
-                    $product->name,
-                    $cartProduct->qtd,
-                    $product->getRawOriginal('price')
-                );
-            }
-            $payment->setShipping()->setCost()->withParameters($order->shipping_value);
-            $payment->setShipping()->setType()->withParameters(\PagSeguro\Enum\Shipping\Type::NOT_SPECIFIED);
-            $payment->setExtraAmount(-($discount));
-
-            $payment->addParameter()->withArray(['notificationURL', url('/') . '/paymentNotification/pagseguro']);
-            $payment->setRedirectUrl(url('/'));
-
-            $credentials = new \PagSeguro\Domains\AccountCredentials(
-                config('integrations.pagamento.pagseguro.defines.email'),
-                config('integrations.pagamento.pagseguro.defines.token')
-            );
-
-            try {
-                $result = $payment->register(
-                    $credentials,
-                );
-
-                $order->update([
-                    'payment_link' => $result,
-                    'payment_code' => substr($result, strpos($result, 'code=') + 5),
-                ]);
-
-                return redirect($result);
-            } catch (Exception $e) {
-                dd($e);
-            }
+            PagseguroController::pagseguroPay($order, $cart, $customer);
         }
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, $information) {
         // Log::build([
         //     'driver' => 'single',
         //     'path' => storage_path('logs/pagseguro.log'),
         // ])->info(print_r([$request->all(), $request->path(), $request->method()], true));
 
-        if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') && $request->has('notificationType') && $request->has('notificationCode') && $request->notificationType == 'transaction') {
-            \PagSeguro\Library::initialize();
-            \PagSeguro\Library::cmsVersion()->setName('Nome')->setRelease('1.0.0');
-            \PagSeguro\Library::moduleVersion()->setName('Nome')->setRelease('1.0.0');
-            \PagSeguro\Configuration\Configure::setEnvironment('sandbox');
-            \PagSeguro\Configuration\Configure::setLog(true, storage_path('logs/pagseguro.log'));
+        Log::debug(print_r($information->getStatus()->getCode(), 1));
 
-            $credentials = new \PagSeguro\Domains\AccountCredentials(
-                config('integrations.pagamento.pagseguro.defines.email'),
-                config('integrations.pagamento.pagseguro.defines.token')
-            );
+        // if (Module::has('Pagseguro') && Module::isEnabled('Pagseguro') && $request->has('notificationType') && $request->has('notificationCode') && $request->notificationType == 'transaction') {
+        //     \PagSeguro\Library::initialize();
+        //     \PagSeguro\Library::cmsVersion()->setName('Nome')->setRelease('1.0.0');
+        //     \PagSeguro\Library::moduleVersion()->setName('Nome')->setRelease('1.0.0');
+        //     \PagSeguro\Configuration\Configure::setEnvironment('sandbox');
+        //     \PagSeguro\Configuration\Configure::setLog(true, storage_path('logs/pagseguro.log'));
 
-            try {
-                if (\PagSeguro\Helpers\Xhr::hasPost()) {
-                    $response = \PagSeguro\Services\Transactions\Notification::check(
-                        $credentials
-                    );
+        //     $credentials = new \PagSeguro\Domains\AccountCredentials(
+        //         config('integrations.pagamento.pagseguro.defines.email'),
+        //         config('integrations.pagamento.pagseguro.defines.token')
+        //     );
 
-                    // Log::build([
-                    //     'driver' => 'single',
-                    //     'path' => storage_path('logs/pagseguro.log'),
-                    // ])->info(print_r($response, true));
+        //     try {
+        //         if (\PagSeguro\Helpers\Xhr::hasPost()) {
+        //             $response = \PagSeguro\Services\Transactions\Notification::check(
+        //                 $credentials
+        //             );
 
-                    $order = Order::where('id', $response->getReference())->firstOrFail();
+        //             // Log::build([
+        //             //     'driver' => 'single',
+        //             //     'path' => storage_path('logs/pagseguro.log'),
+        //             // ])->info(print_r($response, true));
 
-                    if ($response->getStatus() == PagSeguroStatus::STATUS_WAITING_PAYMENT->value) {
-                        $order->update([
-                            'tid' => $response->getCode(),
-                        ]);
-                    } elseif ($response->getStatus() == PagSeguroStatus::STATUS_PAID->value) {
-                        $order->update([
-                            'status' => OrderStatus::STATUS_PAGAMENTO_REALIZADO,
-                        ]);
-                    } elseif (
-                        $response->getStatus() == PagSeguroStatus::STATUS_REFUNDED->value ||
-                        $response->getStatus() == PagSeguroStatus::STATUS_CANCELLED->value
-                    ) {
-                        $order->update([
-                            'status' => OrderStatus::STATUS_CANCELADO,
-                        ]);
-                    }
-                }
-            } catch (Exception $e) {
-                exit($e->getMessage());
-            }
-        }
+        //             $order = Order::where('id', $response->getReference())->firstOrFail();
+
+        //             if ($response->getStatus() == PagSeguroStatus::STATUS_WAITING_PAYMENT->value) {
+        //                 $order->update([
+        //                     'tid' => $response->getCode(),
+        //                 ]);
+        //             } elseif ($response->getStatus() == PagSeguroStatus::STATUS_PAID->value) {
+        //                 $order->update([
+        //                     'status' => OrderStatus::STATUS_PAGAMENTO_REALIZADO,
+        //                 ]);
+        //             } elseif (
+        //                 $response->getStatus() == PagSeguroStatus::STATUS_REFUNDED->value ||
+        //                 $response->getStatus() == PagSeguroStatus::STATUS_CANCELLED->value
+        //             ) {
+        //                 $order->update([
+        //                     'status' => OrderStatus::STATUS_CANCELADO,
+        //                 ]);
+        //             }
+        //         }
+        //     } catch (Exception $e) {
+        //         exit($e->getMessage());
+        //     }
+        // }
     }
 }
