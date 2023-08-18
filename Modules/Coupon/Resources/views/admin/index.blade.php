@@ -71,10 +71,10 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action :href="route('admin.coupons.edit', $item->id)" title="Editar">
-                                <i class="text-base ti ti-edit"></i>
+                                <i class="text-base align-middle icon-[tabler--edit]"></i>
                             </x-admin.table-action>
                             <x-admin.table-action :href="route('admin.coupons.destroy', $item->id)" title="Excluir" :destroy="true">
-                                <i class="text-base ti ti-trash"></i>
+                                <i class="text-base align-middle icon-[tabler--trash]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>

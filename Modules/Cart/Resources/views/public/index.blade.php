@@ -60,7 +60,7 @@
                                     @method('DELETE')
                                     <button type="submit" title="Remover produto"
                                         class="px-3 py-2 text-xs text-gray-900 bg-white hover:bg-gray-100 hover:text-blue-700">
-                                        <i class="text-base ti ti-trash"></i>
+                                        <i class="text-base ti align-middle icon-[tabler--trash]"></i>
                                     </button>
                                 </form>
                             </div>

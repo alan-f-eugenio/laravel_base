@@ -53,13 +53,13 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action :href="route('admin.contents.index', $item->id)" title="Listar Conteúdos">
-                                <i class="text-base ti ti-list-details"></i>
+                                <i class="text-base align-middle icon-[tabler--list-details]"></i>
                             </x-admin.table-action>
                             <x-admin.table-action :href="route('admin.contentNavs.edit', $item->id)" title="Editar">
-                                <i class="text-base ti ti-edit"></i>
+                                <i class="text-base align-middle icon-[tabler--edit]"></i>
                             </x-admin.table-action>
                             <x-admin.table-action :href="route('admin.contentNavs.destroy', $item->id)" title="Excluir" :destroy="true">
-                                <i class="text-base ti ti-trash"></i>
+                                <i class="text-base align-middle icon-[tabler--trash]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>

@@ -24,7 +24,7 @@
     {{ $attributes->merge(['class' => $classes]) }}>
     <button class="flex items-center justify-between w-full py-2 text-left" type="button"
         @click.debounce.150ms="{{ $dataOpen }}= !{{ $dataOpen }}">
-        {{ $trigger }} <i class="ti ti-chevron-down"></i>
+        {{ $trigger }} <i class="align-middle icon-[tabler--chevron-down]"></i>
     </button>
 
 

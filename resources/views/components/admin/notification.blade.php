@@ -2,16 +2,16 @@
     $messageA = session('message');
     $bgClass = 'bg-green-300';
     $textColor = 'text-green-500';
-    $icon = 'ti-check';
+    $icon = 'icon-[tabler--check]';
 
     if ($messageA['type'] == 'error') {
         $bgClass = 'bg-red-300';
         $textColor = 'text-red-500';
-        $icon = 'ti-x';
+        $icon = 'icon-[tabler--x]';
     } elseif ($messageA['type'] == 'warning') {
         $bgClass = 'bg-red-300';
         $textColor = 'text-red-500';
-        $icon = 'ti-alert-triangle';
+        $icon = 'icon-[tabler--alert-triangle]';
     }
 @endphp
 
@@ -20,7 +20,7 @@
     {{ $bgClass }}"
     role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 {{ $textColor }} bg-white rounded-lg">
-        <i class="ti {{ $icon }}"></i>
+        <i class="align-middle {{ $icon }}"></i>
     </div>
     <div class="mx-3 text-sm font-normal">
         {{ session('message')['text'] }}
@@ -28,6 +28,6 @@
     <button type="button"
         class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
         data-dismiss-target="#toast-message" aria-label="Close">
-        <i class="text-xl leading-5 ti ti-x"></i>
+        <i class="text-xl leading-5 align-middle icon-[tabler--x]"></i>
     </button>
 </div>

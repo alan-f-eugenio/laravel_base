@@ -67,7 +67,7 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action :href="route('admin.carts.destroy', $item->id)" title="Excluir" :destroy="true">
-                                <i class="text-base ti ti-trash"></i>
+                                <i class="text-base align-middle icon-[tabler--trash]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>

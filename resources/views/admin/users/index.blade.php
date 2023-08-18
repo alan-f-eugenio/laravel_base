@@ -63,16 +63,16 @@
                             <x-admin.table-action :href="$item->id == auth('admin')->id()
                                 ? route('admin.profile.edit')
                                 : route('admin.users.edit', $item->id)" title="Editar">
-                                <i class="text-base ti ti-edit"></i>
+                                <i class="text-base align-middle icon-[tabler--edit]"></i>
                             </x-admin.table-action>
                             @if ($item->id != auth('admin')->id())
                                 <x-admin.table-action :href="route('admin.users.destroy', $item->id)" title="Excluir"
                                     :destroy="true">
-                                    <i class="text-base ti ti-trash"></i>
+                                    <i class="text-base align-middle icon-[tabler--trash]"></i>
                                 </x-admin.table-action>
                             @else
                                 <x-admin.table-action-disabled>
-                                    <i class="text-base ti ti-trash"></i>
+                                    <i class="text-base align-middle icon-[tabler--trash]"></i>
                                 </x-admin.table-action-disabled>
                             @endif
                         </x-admin.table-actions-td>

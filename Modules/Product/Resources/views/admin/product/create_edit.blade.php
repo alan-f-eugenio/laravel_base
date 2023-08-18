@@ -230,7 +230,7 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <i class="text-7xl ti ti-photo-plus"></i>
+                                                <i class="text-7xl align-middle icon-[tabler--photo-plus]"></i>
                                             @endif
                                         </x-admin.table-action>
                                         <input class="w-px h-px child_filename -z-10" type="file"
@@ -322,15 +322,15 @@
                                 <x-admin.table-actions-td>
                                     <x-admin.table-action href="javascript:;" class="upOptBtn"
                                         title="Subir Ordenação">
-                                        <i class="text-base ti ti-arrow-move-up"></i>
+                                        <i class="text-base align-middle icon-[tabler--arrow-move-up]"></i>
                                     </x-admin.table-action>
                                     <x-admin.table-action href="javascript:;" class="downOptBtn"
                                         title="Descer Ordenação">
-                                        <i class="text-base ti ti-arrow-move-down"></i>
+                                        <i class="text-base ti align-middle icon-[tabler--arrow-move-down]"></i>
                                     </x-admin.table-action>
                                     <x-admin.table-action href="javascript:;" class="removeOptBtn"
                                         title="Remover Opção">
-                                        <i class="text-base ti ti-trash"></i>
+                                        <i class="text-base align-middle icon-[tabler--trash]"></i>
                                     </x-admin.table-action>
                                 </x-admin.table-actions-td>
                             </tr>
@@ -345,7 +345,7 @@
                                 <div class="flex flex-col items-center justify-center">
                                     <x-admin.table-action href="javascript:;" class="z-10 addOptPhoto"
                                         title="Adicionar Imagem">
-                                        <i class="text-7xl ti ti-photo-plus"></i>
+                                        <i class="text-7xl align-middle icon-[tabler--photo-plus]"></i>
                                     </x-admin.table-action>
                                     <input class="w-px h-px child_filename -z-10" type="file"
                                         name="child_filename[]" accept=".png, .jpg, .jpeg" disabled>
@@ -417,14 +417,14 @@
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
                                 <x-admin.table-action href="javascript:;" class="upOptBtn" title="Subir Ordenação">
-                                    <i class="text-base ti ti-arrow-move-up"></i>
+                                    <i class="text-base align-middle icon-[tabler--arrow-move-up]"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action href="javascript:;" class="downOptBtn"
                                     title="Descer Ordenação">
-                                    <i class="text-base ti ti-arrow-move-down"></i>
+                                    <i class="text-base ti align-middle icon-[tabler--arrow-move-down]"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
-                                    <i class="text-base ti ti-trash"></i>
+                                    <i class="text-base align-middle icon-[tabler--trash]"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
                         </tr>
@@ -661,7 +661,7 @@
                         el1.classList.remove("px-3", "py-2");
                     } else {
                         el1.classList.add("px-3", "py-2");
-                        el1.innerHTML = '<i class="text-7xl ti ti-photo-plus"></i>';
+                        el1.innerHTML = '<i class="text-7xl align-middle icon-[tabler--photo-plus]"></i>';
                     }
                 })
             }

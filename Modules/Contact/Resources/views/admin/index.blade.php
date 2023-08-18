@@ -57,10 +57,10 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action :href="route('admin.contacts.show', $item->id)" title="Visualizar">
-                                <i class="text-base ti ti-eye"></i>
+                                <i class="text-base align-middle icon-[tabler--eye]"></i>
                             </x-admin.table-action>
                             <x-admin.table-action :href="route('admin.contacts.destroy', $item->id)" title="Excluir" :destroy="true">
-                                <i class="text-base ti ti-trash"></i>
+                                <i class="text-base align-middle icon-[tabler--trash]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>

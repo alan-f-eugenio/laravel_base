@@ -53,7 +53,7 @@
                     @forelse ($items as $item)
                         <tr data-id="{{ $item->id }}" class="bg-white border-b">
                             <x-admin.table-td class="ordemNumber cursor-grab">
-                                <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+                                <i class="mr-3 text-base align-middle icon-[tabler--arrows-up-down]"></i>
                                 <span class="text-xl">{{ $item->ordem }}</span>
                             </x-admin.table-td>
                             <x-admin.table-td :main="true">
@@ -74,13 +74,13 @@
                             <x-admin.table-actions-td>
                                 <x-admin.table-action class="spotlight" :data-title="$local . ' - ' . $item->title" :href="asset('storage/' . $item->filename)"
                                     title="Visualizar">
-                                    <i class="text-base ti ti-eye"></i>
+                                    <i class="text-base align-middle icon-[tabler--eye]"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action :href="route('admin.banners.edit', $item->id)" title="Editar">
-                                    <i class="text-base ti ti-edit"></i>
+                                    <i class="text-base align-middle icon-[tabler--edit]"></i>
                                 </x-admin.table-action>
                                 <x-admin.table-action :href="route('admin.banners.destroy', $item->id)" title="Excluir" :destroy="true">
-                                    <i class="text-base ti ti-trash"></i>
+                                    <i class="text-base align-middle icon-[tabler--trash]"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
                         </tr>

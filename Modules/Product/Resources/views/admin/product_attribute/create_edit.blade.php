@@ -48,7 +48,7 @@
                     @foreach ($listOptions as $keyOption => $option)
                         <tr class="bg-white border-b optBox">
                             <x-admin.table-td class="ordemNumber cursor-grab">
-                                <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+                                <i class="mr-3 text-base align-middle icon-[tabler--arrows-up-down]"></i>
                                 <span class="text-xl">{{ $option->ordem }}</span>
                                 <x-admin.form-input type="hidden" inpName="option_ordem[]" required
                                     :inpValue="$option->ordem" />
@@ -71,7 +71,7 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <i class="text-base ti ti-photo-plus"></i>
+                                                <i class="text-base align-middle icon-[tabler--photo-plus]"></i>
                                             @endif
                                         </x-admin.table-action>
                                         <input class="w-px h-px option_filename -z-10" type="file"
@@ -86,14 +86,14 @@
                             </x-admin.table-td>
                             <x-admin.table-actions-td>
                                 <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
-                                    <i class="text-base ti ti-trash"></i>
+                                    <i class="text-base align-middle icon-[tabler--trash]"></i>
                                 </x-admin.table-action>
                             </x-admin.table-actions-td>
                         </tr>
                     @endforeach
                     <tr class="hidden bg-white border-b optBoxNew notSortable">
                         <x-admin.table-td class="ordemNumber cursor-grab">
-                            <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+                            <i class="mr-3 text-base align-middle icon-[tabler--arrows-up-down]"></i>
                             <span class="text-xl"></span>
                             <x-admin.form-input type="hidden" inpName="option_ordem[]" disabled required />
                             <x-admin.form-input type="hidden" inpName="option_id[]" disabled required />
@@ -106,7 +106,7 @@
                                 <div class="flex flex-col items-center justify-center">
                                     <x-admin.table-action href="javascript:;" class="z-10 addOptPhoto"
                                         title="Adicionar Opção">
-                                        <i class="text-base ti ti-photo-plus"></i>
+                                        <i class="text-base align-middle icon-[tabler--photo-plus]"></i>
                                     </x-admin.table-action>
                                     <input class="w-px h-px option_filename -z-10" type="file"
                                         name="option_filename[]" accept=".png, .jpg, .jpeg" disabled required>
@@ -119,7 +119,7 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action href="javascript:;" class="removeOptBtn" title="Remover Opção">
-                                <i class="text-base ti ti-trash"></i>
+                                <i class="text-base align-middle icon-[tabler--trash]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>
@@ -130,7 +130,7 @@
                         </x-admin.table-td>
                         <x-admin.table-actions-td>
                             <x-admin.table-action href="javascript:;" id="addOptBtn" title="Adicionar Opção">
-                                <i class="text-base ti ti-plus max-h-"></i>
+                                <i class="text-base align-middle icon-[tabler--plus]"></i>
                             </x-admin.table-action>
                         </x-admin.table-actions-td>
                     </tr>
@@ -189,7 +189,7 @@
                             el1.classList.remove("px-3", "py-2");
                         } else {
                             el1.classList.add("px-3", "py-2");
-                            el1.innerHTML = '<i class="text-base ti ti-photo-plus"></i>';
+                            el1.innerHTML = '<i class="text-base align-middle icon-[tabler--photo-plus]"></i>';
                         }
                     })
                 }

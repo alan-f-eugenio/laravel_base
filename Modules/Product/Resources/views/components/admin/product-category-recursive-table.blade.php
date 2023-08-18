@@ -4,7 +4,7 @@
     <x-admin.table-td colspan="99" :classes="$classes . ($first ? ' py-0' : '')">
         <div class="flex">
             @if (!$first)
-                <i class="text-xl ti ti-corner-down-right"></i>
+                <i class="text-xl align-middle icon-[tabler--corner-down-right]"></i>
             @endif
             <x-admin.table :collection="$collection" :tableOnly="true">
                 <x-slot name="ths">
@@ -30,7 +30,7 @@
                 <x-slot name="tbody">
 <tr class="bg-white">
     <x-admin.table-td class="border-b ordemNumber cursor-grab">
-        <i class="mr-3 text-base ti ti-arrows-up-down"></i>
+        <i class="mr-3 text-base align-middle icon-[tabler--arrows-up-down]"></i>
         <span class="text-xl">{{ $item->ordem }}</span>
     </x-admin.table-td>
     <x-admin.table-td :main="true" class="border-b">
@@ -47,20 +47,20 @@
     </x-admin.table-td>
     <x-admin.table-actions-td class="border-b" :justifyEnd="true">
         <x-admin.table-action :href="route('admin.product_categories.edit', $item->id)" title="Editar">
-            <i class="text-base ti ti-edit"></i>
+            <i class="text-base align-middle icon-[tabler--edit]"></i>
         </x-admin.table-action>
         <x-admin.table-action :href="route('admin.product_categories.destroy', $item->id)" title="Excluir" :destroy="true">
-            <i class="text-base ti ti-trash"></i>
+            <i class="text-base align-middle icon-[tabler--trash]"></i>
         </x-admin.table-action>
         @if ($collection->count())
             <x-admin.table-action href="javascript:;" title="Subcategorias"
                 @click="openChild = !openChild">
-                <i class="text-base ti ti-chevron-down"
-                    :class="{ 'ti-chevron-up font-semibold': openChild, 'ti-chevron-down': !openChild }"></i>
+                <i class="text-base align-middle icon-[tabler--chevron-down]"
+                    :class="{ 'icon-[tabler--chevron-up] font-semibold': openChild, 'icon-[tabler--chevron-down]': !openChild }"></i>
             </x-admin.table-action>
         @else
             <x-admin.table-action-disabled>
-                <i class="text-base ti ti-chevron-down"></i>
+                <i class="text-base align-middle icon-[tabler--chevron-down]"></i>
             </x-admin.table-action-disabled>
         @endif
     </x-admin.table-actions-td>
